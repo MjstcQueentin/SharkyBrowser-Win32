@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SharkyBrowser.SharkySettings.SharkySettingsUpdatesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkyBrowser.SharkySettings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <StackPanel Padding="24 16" Spacing="4">
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0 0 0 16">Updates</TextBlock>
+
+        <Expander
+            IsExpanded="True"
+            ExpandDirection="Down"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="Forward"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Current version</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}" x:Name="VersionTextBlock">
+                        X.y.z.zz
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                    <Button>Check for updates now</Button>
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+
+        <Expander
+        IsExpanded="False"
+        ExpandDirection="Down"
+        HorizontalAlignment="Stretch"
+        HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="Sync"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Automatic updates</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Sharky can update itself in the background
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                    <CheckBox>Check for updates every time Sharky starts</CheckBox>
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+    </StackPanel>
+</Page>

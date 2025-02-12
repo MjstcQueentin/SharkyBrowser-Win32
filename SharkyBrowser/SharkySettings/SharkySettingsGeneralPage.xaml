@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SharkyBrowser.SharkySettings.SharkySettingsGeneralPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkyBrowser.SharkySettings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <StackPanel Padding="24 16" Spacing="4">
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0 0 0 16">General Settings</TextBlock>
+
+        <Expander
+            IsExpanded="False"
+            ExpandDirection="Down"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="Home"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Homepage</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Define which webpage to open when Sharky starts
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                    <TextBox 
+                        HorizontalAlignment="Stretch"
+                        PlaceholderText="https://start.lesmajesticiels.org/" 
+                        x:Name="HomepageTextBox" 
+                        TextChanged="HomepageTextBox_TextChanged"/>
+                    <StackPanel Padding="0 6" Orientation="Horizontal">
+                        <StackPanel.Spacing>6</StackPanel.Spacing>
+                        <HyperlinkButton Tag="https://start.lesmajesticiels.org/" Click="HomepageSuggestionButton_Click">Majestic Start</HyperlinkButton>
+                        <HyperlinkButton Tag="about:blank" Click="HomepageSuggestionButton_Click">Blank page</HyperlinkButton>
+                    </StackPanel>
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+
+        <Expander
+            IsExpanded="False"
+            ExpandDirection="Down"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <FontIcon Grid.Column="0" Grid.RowSpan="2" Glyph="&#xe721;"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Search providers</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Manage the search engines registered into your Sharky
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel>
+                    <ComboBox Header="Default search engine" Margin="0 0 0 5" ItemsSource="{x:Bind SearchEngines}" x:Name="DefaultSearchEngineComboBox" SelectionChanged="DefaultSearchEngineComboBox_SelectionChanged"/>
+
+                    <ListView Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondary}" ItemsSource="{x:Bind SearchEngines}" CornerRadius="4" x:Name="SearchEnginesListView">
+                        <ListView.Footer>
+                            <StackPanel Padding="4 6" Orientation="Horizontal">
+                                <StackPanel.Spacing>6</StackPanel.Spacing>
+                                <Button Height="32" x:Name="AddSearchEngineButton" Click="AddSearchEngineButton_Click" ToolTipService.ToolTip="Add new">
+                                    <FontIcon Glyph="&#xE710;" FontSize="16"/>
+                                </Button>
+                                <Button Height="32" x:Name="RemoveSearchEngineButton" Click="RemoveSearchEngineButton_Click" ToolTipService.ToolTip="Remove selected">
+                                    <FontIcon Glyph="&#xE738;" FontSize="16"/>
+                                </Button>
+                            </StackPanel>
+                        </ListView.Footer>
+                    </ListView>
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+
+        <Expander
+             IsExpanded="False"
+             ExpandDirection="Down"
+             HorizontalAlignment="Stretch"
+             HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="Download"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Download location</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        The default folder to store your downloaded files
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <TextBox PlaceholderText="%temp%" x:Name="DownloadFolderTextBox" TextChanged="DownloadFolderTextBox_TextChanged"></TextBox>
+            </Expander.Content>
+        </Expander>
+
+        <Expander
+             IsExpanded="False"
+             ExpandDirection="Down"
+             HorizontalAlignment="Stretch"
+             HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="More"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Browser behaviour</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Miscellaneous settings to customize Sharky's behaviour
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel>
+                    <CheckBox Content="Warn me when I am about to close multiple tabs or windows at once" 
+                              x:Name="CloseWarningCheckBox" 
+                              Checked="CloseWarningCheckBox_Checked" 
+                              Unchecked="CloseWarningCheckBox_Unchecked"/>
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+    </StackPanel>
+</Page>

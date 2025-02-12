@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SharkyBrowser.SharkySettings.SharkySettingsContentFilteringPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkyBrowser.SharkySettings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <StackPanel Padding="24 16" Spacing="4">
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0 0 0 16">Content filters</TextBlock>
+
+        <Expander
+        IsExpanded="False"
+        ExpandDirection="Down"
+        HorizontalAlignment="Stretch"
+        HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="PreviewLink"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Advertisement</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Define Sharky's behaviour regarding ads you may see
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                    
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+
+        <Expander
+            IsExpanded="False"
+            ExpandDirection="Down"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="Dislike"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Annoying content</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Define Sharky's behaviour regarding content that may harm your user experience
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+    </StackPanel>
+</Page>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SharkyBrowser.SharkySettings.SharkySettingsLocalizationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkyBrowser.SharkySettings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <StackPanel Padding="24 16" Spacing="4">
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0 0 0 16">Localization</TextBlock>
+
+        <Expander
+        IsExpanded="False"
+        ExpandDirection="Down"
+        HorizontalAlignment="Stretch"
+        HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <FontIcon Grid.Column="0" Grid.RowSpan="2" Glyph="&#xF2B7;"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Default browsing language</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}" x:Name="VersionTextBlock">
+                        Define in which language you want to see websites. This won't affect Sharky's display language.
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                    <TextBox x:Name="AcceptLanguageTextBox"></TextBox>
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+    </StackPanel>
+</Page>

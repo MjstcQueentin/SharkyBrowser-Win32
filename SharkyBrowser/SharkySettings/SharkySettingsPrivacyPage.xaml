@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SharkyBrowser.SharkySettings.SharkySettingsPrivacyPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkyBrowser.SharkySettings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <StackPanel Padding="24 16" Spacing="4">
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0 0 0 16">Privacy</TextBlock>
+
+        <Expander
+            IsExpanded="False"
+            ExpandDirection="Down"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Left">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="OpenFile"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Cookies</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Define your default cookie policy
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" Padding="4 0">
+                    <RadioButtons MaxColumns="1">
+                        <RadioButton Tag="Accept" x:Name="AcceptAllCookiesRadioButton" Checked="CookiePolicyRadioButtons_SelectionChanged">Accept all cookies</RadioButton>
+                        <RadioButton Tag="RejectThirdParty" x:Name="RejectThirdPartyCookiesRadioButton" Checked="CookiePolicyRadioButtons_SelectionChanged">Reject third party cookies</RadioButton>
+                        <RadioButton Tag="Reject" x:Name="RejectAllCookiesRadioButton" Checked="CookiePolicyRadioButtons_SelectionChanged">Reject all cookies</RadioButton>
+                    </RadioButtons>
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+        
+        <Expander
+            IsExpanded="False"
+            ExpandDirection="Down"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="Important"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Tracking Prevention</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Enables a set of headers and filters to protect you from known trackers across the Web
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" Spacing="6">
+                    <InfoBar 
+                        IsOpen="True" 
+                        Severity="Informational" 
+                        IsClosable="False"
+                        Message="Please remember that even if this setting is enabled and the header is sent, the websites you visit are not forced to respect it in any technical nor legal way."/>
+                    <CheckBox x:Name="DNTCheckBox" Checked="DNTCheckBox_Checked" Unchecked="DNTCheckBox_Unchecked">
+                        Enable Tracking Prevention
+                    </CheckBox>
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+
+        <Expander
+            IsExpanded="False"
+            ExpandDirection="Down"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="Delete"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Erase your data</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Here are the options that enable you to erase your data from Sharky right away.
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" Spacing="6">
+                    <InfoBar 
+                        IsOpen="True" 
+                        Severity="Informational" 
+                        IsClosable="False"
+                        Message="These buttons allow you to erase your data on this device right now. The deletion will then be synchronized to your MajestiCloud account."/>
+
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Button Content="Erase your browsing history">
+                            <Button.Flyout>
+                                <Flyout>
+                                    <StackPanel>
+                                        <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="Please confirm that you want to erase your browsing history." Margin="0,0,0,12" />
+                                        <Button x:Name="EraseBrowsingHistoryButton" Click="EraseBrowsingHistoryButton_Click" Content="Yes, erase my browsing history" />
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                        <Button>Erase your downloaded files history</Button>
+                        <Button>Erase your search history</Button>
+                        <Button>Erase all Sharky's cookies</Button>
+                        <Button>Erase Sharky's cache</Button>
+                    </StackPanel>
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+    </StackPanel>
+</Page>

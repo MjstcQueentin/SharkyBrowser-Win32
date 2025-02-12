@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SharkyBrowser (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SharkyBrowser (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

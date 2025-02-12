@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SharkyBrowser.SharkySettings.SharkySettingsSafetyPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkyBrowser.SharkySettings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <StackPanel Padding="24 16" Spacing="4">
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0 0 0 16">Safety</TextBlock>
+
+        <Expander
+            IsExpanded="False"
+            ExpandDirection="Down"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Left">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <FontIcon Grid.Column="0" Grid.RowSpan="2" Glyph="&#xea18;"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Safe browsing</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Manage the Safe Browsing service
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" Padding="4 0">
+                    
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+
+        <Expander
+            IsExpanded="False"
+            ExpandDirection="Down"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Left">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <FontIcon Grid.Column="0" Grid.RowSpan="2" Glyph="&#xED54;"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">ChildGuard</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Protect your children against the Web's sensitive content
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" Padding="4 0">
+
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+
+        <Expander
+            IsExpanded="False"
+            ExpandDirection="Down"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Left">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
+                    <Grid.Padding>0 16</Grid.Padding>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <FontIcon Grid.Column="0" Grid.RowSpan="2" Glyph="&#xE72E;"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0">General password</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
+                        Protect your data in Sharky with an additional password
+                    </TextBlock>
+                </Grid>
+            </Expander.Header>
+            <Expander.Content>
+                <StackPanel Orientation="Vertical" Padding="4 0">
+
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
+
+    </StackPanel>
+</Page>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SharkyBrowser.SharkySettings.SharkySettingsGeneralPageAddSearchEngineDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkyBrowser.SharkySettings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TextBox Header="Search engine name" PlaceholderText="Name" x:Name="SearchEngineNameTextBox" Margin="0 0 0 15"/>
+        <TextBox Header="Search engine URL pattern" PlaceholderText="https://www.example.com/search?q=%s" x:Name="SearchEngineUrlTextBox" Margin="0 0 0 5"/>
+        <TextBlock Text="Type %s at the position where the search queries must be inserted into the URL."/>
+    </StackPanel>
+</Page>

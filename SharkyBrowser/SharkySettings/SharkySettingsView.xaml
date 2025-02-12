@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SharkyBrowser.SharkySettings.SharkySettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkyBrowser.SharkySettings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <NavigationView x:Name="SettingsNavigationView" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" PaneTitle="Sharky Settings"
+        CompactModeThresholdWidth="0"
+        ExpandedModeThresholdWidth="1024"
+        Loaded="NavigationView_Loaded"
+        ItemInvoked="NavigationView_ItemInvoked"
+        SelectionChanged="NavigationView_SelectionChanged">
+        <NavigationView.MenuItems>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsGeneralPage" Icon="Setting" Content="General"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsPrivacyPage" Icon="View" Content="Privacy"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsSafetyPage" Icon="Permissions" Content="Safety"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsContentFilteringPage" Icon="Filter" Content="Content filters"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsUpdatesPage" Icon="Sync" Content="Updates"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsLocalizationPage" Icon="World" Content="Localization"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsTroubleshootingPage" Icon="Repair" Content="Troubleshooting"/>
+        </NavigationView.MenuItems>
+        <NavigationView.FooterMenuItems>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsAccountPage" Icon="Contact" Content="Account"/>
+        </NavigationView.FooterMenuItems>
+
+        <ScrollViewer>
+            <Frame x:Name="SettingsViewFrame" IsTabStop="True"/>
+        </ScrollViewer>
+    </NavigationView>
+</Page>
