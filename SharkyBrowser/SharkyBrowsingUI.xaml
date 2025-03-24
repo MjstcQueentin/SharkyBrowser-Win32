@@ -17,8 +17,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -191,13 +191,13 @@
             </Button>
         </Grid>
 
-        <ProgressBar x:Name="TheProgressBar" IsIndeterminate="True" Grid.Row="1"></ProgressBar>
-
-        <web:SharkyWebView x:Name="TheWebView" Grid.Row="2"
+        <ProgressBar x:Name="TheProgressBar" IsIndeterminate="True" Visibility="Collapsed" Grid.Row="1"></ProgressBar>
+        <InfoBar Grid.Row="2" Margin="-1" x:Name="MainInfoBar" IsOpen="False" Severity="Informational" Title="Hello" Message="Welcome to Sharky" />
+       
+        <web:SharkyWebView x:Name="TheWebView" Grid.Row="3"
             NavigationStarting="SharkyWebView_NavigationStarting" 
             NavigationCompleted="TheWebView_NavigationCompleted">
         </web:SharkyWebView>
-        <Grid Grid.Row="2" x:Name="SpecialPageContainer" Visibility="Collapsed" Background="Transparent"/>
-        <InfoBar Grid.Row="3" Margin="-1" x:Name="MainInfoBar" IsOpen="False" Severity="Informational" Title="Hello" Message="Welcome to Sharky" />
+        <Frame x:Name="ContentFrame" Visibility="Collapsed" Grid.Row="3" />
     </Grid>
 </UserControl>

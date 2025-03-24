@@ -36,6 +36,7 @@ namespace SharkyBrowser
         public SharkyBrowsingUI(string uri)
         {
             InitializeComponent();
+
             Loaded += async (s, e) =>
             {
                 if (!IsWebViewInitialized)
@@ -50,7 +51,14 @@ namespace SharkyBrowser
                     await TheWebView.EnsureCoreWebView2Async(await CoreWebView2Environment.CreateWithOptionsAsync("", "", coreViewOptions));
 
                     UrlBox.Text = uri;
-                    TheWebView.Source = new Uri(uri);
+                    if (uri.StartsWith("sharky:"))
+                    {
+                        TriggerSpecialPage(uri.Substring(uri.IndexOf(':') + 1));
+                    }
+                    else
+                    {
+                        TheWebView.Source = new Uri(uri);
+                    }
                 }
             };
 
@@ -348,15 +356,14 @@ namespace SharkyBrowser
 
         private void TriggerSpecialPage(string pageName)
         {
+            ContentFrame.Visibility = Visibility.Visible;
             TheWebView.Visibility = Visibility.Collapsed;
             BookmarkButton.Visibility = Visibility.Collapsed;
             RefreshButton.Visibility = Visibility.Collapsed;
-            SpecialPageContainer.Children.Clear();
 
             if (pageName == "settings")
             {
-                SpecialPageContainer.Visibility = Visibility.Visible;
-                SpecialPageContainer.Children.Add(new SharkySettingsView());
+                ContentFrame.NavigateToType(typeof(SharkySettingsView), null, new());
                 ParentTab.Header = "Sharky Settings";
                 ParentTab.IconSource = new SymbolIconSource() { Symbol = Symbol.Setting };
                 ParentWindow.Title = string.Concat("Sharky Settings | Sharky");
@@ -364,10 +371,9 @@ namespace SharkyBrowser
             }
             else if (pageName == "library")
             {
-                SpecialPageContainer.Visibility = Visibility.Visible;
-                SpecialPageContainer.Children.Add(new SharkyUserLibraryView());
+                ContentFrame.NavigateToType(typeof(SharkyUserLibraryView), null, new());
                 ParentTab.Header = "Sharky Library";
-                ParentTab.IconSource = new SymbolIconSource() { Symbol = Symbol.Setting };
+                ParentTab.IconSource = new SymbolIconSource() { Symbol = Symbol.Library };
                 ParentWindow.Title = string.Concat("Sharky Library | Sharky");
                 return;
             }
@@ -381,8 +387,7 @@ namespace SharkyBrowser
 
         private void RemoveSpecialPage()
         {
-            SpecialPageContainer.Visibility = Visibility.Collapsed;
-            SpecialPageContainer.Children.Clear();
+            ContentFrame.Visibility = Visibility.Collapsed;
             TheWebView.Visibility = Visibility.Visible;
             BookmarkButton.Visibility = Visibility.Visible;
             RefreshButton.Visibility = Visibility.Visible;
@@ -390,12 +395,12 @@ namespace SharkyBrowser
 
         public void Dispose()
         {
-            TheWebView.NavigateToString("");
+            if (TheWebView.CoreWebView2 is not null) TheWebView.NavigateToString("");
         }
 
         public void SaveForLater()
         {
-            TheWebView.NavigateToString("");
+            if (TheWebView.CoreWebView2 is not null) TheWebView.NavigateToString("");
         }
 
         public void Restore()
