@@ -25,6 +25,8 @@
     <None Remove="SharkySettings\SharkySettingsSafetyPage.xaml" />
     <None Remove="SharkySettings\SharkySettingsTroubleshootingPage.xaml" />
     <None Remove="SharkySettings\SharkySettingsUpdatesPage.xaml" />
+    <None Remove="SharkyUser\SharkyUserLibraryHistoryPage.xaml" />
+    <None Remove="SharkyUser\SharkyUserLibraryView.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -117,6 +119,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Remove="SharkySettingsGeneralPageAddSearchEngineDialog.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="SharkyUser\SharkyUserLibraryHistoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="SharkyUser\SharkyUserLibraryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="SharkyFileDownloadUI.xaml">

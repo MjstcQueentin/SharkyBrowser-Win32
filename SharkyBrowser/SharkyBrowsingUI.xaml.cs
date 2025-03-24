@@ -38,7 +38,7 @@ namespace SharkyBrowser
             InitializeComponent();
             Loaded += async (s, e) =>
             {
-                if(!IsWebViewInitialized)
+                if (!IsWebViewInitialized)
                 {
                     CoreWebView2EnvironmentOptions coreViewOptions = new()
                     {
@@ -49,7 +49,7 @@ namespace SharkyBrowser
 
                     await TheWebView.EnsureCoreWebView2Async(await CoreWebView2Environment.CreateWithOptionsAsync("", "", coreViewOptions));
 
-                            UrlBox.Text = uri;
+                    UrlBox.Text = uri;
                     TheWebView.Source = new Uri(uri);
                 }
             };
@@ -216,6 +216,11 @@ namespace SharkyBrowser
             ParentWindow.AddTab("sharky:settings");
         }
 
+        private void HistoryMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+            ParentWindow.AddTab("sharky:library");
+        }
+
         private void GetSupportMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
             ParentWindow.AddTab("https://www.lesmajesticiels.org/support/kb/product/browser");
@@ -355,6 +360,15 @@ namespace SharkyBrowser
                 ParentTab.Header = "Sharky Settings";
                 ParentTab.IconSource = new SymbolIconSource() { Symbol = Symbol.Setting };
                 ParentWindow.Title = string.Concat("Sharky Settings | Sharky");
+                return;
+            }
+            else if (pageName == "library")
+            {
+                SpecialPageContainer.Visibility = Visibility.Visible;
+                SpecialPageContainer.Children.Add(new SharkyUserLibraryView());
+                ParentTab.Header = "Sharky Library";
+                ParentTab.IconSource = new SymbolIconSource() { Symbol = Symbol.Setting };
+                ParentWindow.Title = string.Concat("Sharky Library | Sharky");
                 return;
             }
 
