@@ -11,7 +11,7 @@
 
     <NavigationView x:Name="LibraryNavView" IsSettingsVisible="False" IsBackButtonVisible="Collapsed" PaneTitle="Sharky Library" ItemInvoked="LibraryNavView_ItemInvoked">
         <NavigationView.MenuItems>
-            <NavigationViewItem Content="Historique" Tag="SharkyUserHistoryPage" x:Name="HistoryNavigationViewItem">
+            <NavigationViewItem Content="History" Tag="SharkyUserHistoryPage" x:Name="HistoryNavigationViewItem" IsSelected="True">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE81C;" />
                 </NavigationViewItem.Icon>

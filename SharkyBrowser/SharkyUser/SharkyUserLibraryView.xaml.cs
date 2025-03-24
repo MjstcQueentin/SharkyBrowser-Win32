@@ -13,7 +13,7 @@ namespace SharkyBrowser.SharkyUser
 
             FrameNavigationOptions navOptions = new();
             ContentFrame.NavigateToType(typeof(SharkyUserLibraryHistoryPage), null, navOptions);
-            LibraryNavView.Header = "Historique";
+            LibraryNavView.Header = "History";
         }
 
         private void LibraryNavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -25,7 +25,7 @@ namespace SharkyBrowser.SharkyUser
             {
                 case "SharkyUserLibraryHistoryPage":
                     ContentFrame.NavigateToType(typeof(SharkyUserLibraryHistoryPage), null, navOptions);
-                    LibraryNavView.Header = "Historique";
+                    LibraryNavView.Header = "History";
                     break;
             }
         }
