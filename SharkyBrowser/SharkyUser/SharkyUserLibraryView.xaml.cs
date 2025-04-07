@@ -1,7 +1,5 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Xml.Linq;
 
 namespace SharkyBrowser.SharkyUser
 {
@@ -11,22 +9,38 @@ namespace SharkyBrowser.SharkyUser
         {
             InitializeComponent();
 
-            FrameNavigationOptions navOptions = new();
-            ContentFrame.NavigateToType(typeof(SharkyUserLibraryHistoryPage), null, navOptions);
-            LibraryNavView.Header = "History";
+            SetNavigation(HistoryNavigationViewItem);
         }
 
         private void LibraryNavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            FrameNavigationOptions navOptions = new();
-            navOptions.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
-
-            switch (args.InvokedItem.GetType().Name)
+            SetNavigation(args.InvokedItem as NavigationViewItem, new()
             {
-                case "SharkyUserLibraryHistoryPage":
-                    ContentFrame.NavigateToType(typeof(SharkyUserLibraryHistoryPage), null, navOptions);
-                    LibraryNavView.Header = "History";
-                    break;
+                TransitionInfoOverride = args.RecommendedNavigationTransitionInfo
+            });
+        }
+
+        private void LibraryNavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            SetNavigation(args.SelectedItem as NavigationViewItem, new()
+            {
+                TransitionInfoOverride = args.RecommendedNavigationTransitionInfo
+            });
+        }
+
+        private void SetNavigation(NavigationViewItem item, FrameNavigationOptions navOptions = null)
+        {
+            if (navOptions == null) navOptions = new();
+
+            if (item == HistoryNavigationViewItem)
+            {
+                ContentFrame.NavigateToType(typeof(SharkyUserLibraryHistoryPage), null, navOptions);
+                LibraryNavView.Header = "History";
+            }
+            else if (item == BookmarkNavigationViewItem)
+            {
+                ContentFrame.NavigateToType(typeof(SharkyUserLibraryBookmarkPage), null, navOptions);
+                LibraryNavView.Header = "Bookmarks";
             }
         }
     }

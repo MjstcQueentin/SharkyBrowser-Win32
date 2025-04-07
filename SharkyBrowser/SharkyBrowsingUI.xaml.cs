@@ -64,6 +64,19 @@ namespace SharkyBrowser
 
             TheWebView.CoreWebView2Initialized += TheWebView_CoreWebView2Initialized;
             DownloadUI.DownloadRetryRequested += DownloadUI_DownloadRetryRequested;
+            BookmarkUI.BookmarkSaved += BookmarkUI_BookmarkSaved;
+            BookmarkUI.BookmarkPageRequested += BookmarkUI_BookmarkPageRequested;
+        }
+
+        private void BookmarkUI_BookmarkPageRequested(object sender, SharkyBookmarkUIEventArgs e)
+        {
+            ParentWindow.AddTab("sharky:library/bookmarks");
+        }
+
+        private void BookmarkUI_BookmarkSaved(object sender, SharkyBookmarkUIEventArgs e)
+        {
+            BookmarkButtonIcon.Glyph = "\uE735";
+            BookmarkButton.Flyout.Hide();
         }
 
         private void DownloadUI_DownloadRetryRequested(object sender, SharkyFileDownloadUIEventArgs e)
@@ -151,6 +164,11 @@ namespace SharkyBrowser
         private void FlyoutButton_Click(object sender, RoutedEventArgs e)
         {
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+        }
+
+        private void BookmarkButton_Click(object sender, RoutedEventArgs e)
+        {
+            BookmarkUI.OnFlyoutOpen(TheWebView.CoreWebView2.DocumentTitle, TheWebView.CoreWebView2.Source);
         }
 
         private void NewTabMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
@@ -338,6 +356,9 @@ namespace SharkyBrowser
             ParentTab.Header = args.Uri.ToString();
             RefreshButton.IsEnabled = false;
             TheProgressBar.Visibility = Visibility.Visible;
+
+            SharkyWebResource bookmark = SharkyUserDatabase.Instance.GetResourceByURI("bookmark", args.Uri.ToString());
+            BookmarkButtonIcon.Glyph = (bookmark == null) ? "\uE734" : "\uE735";
         }
 
         private void TheWebView_NavigationCompleted(WebView2 sender, CoreWebView2NavigationCompletedEventArgs args)
@@ -369,7 +390,7 @@ namespace SharkyBrowser
                 ParentWindow.Title = string.Concat("Sharky Settings | Sharky");
                 return;
             }
-            else if (pageName == "library")
+            else if (pageName.StartsWith("library"))
             {
                 ContentFrame.NavigateToType(typeof(SharkyUserLibraryView), null, new());
                 ParentTab.Header = "Sharky Library";

@@ -13,6 +13,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="SharkyBookmarkUI.xaml" />
     <None Remove="SharkyBrowsingUI.xaml" />
     <None Remove="SharkyFileDownloadUI.xaml" />
     <None Remove="SharkySettingsGeneralPageAddSearchEngineDialog.xaml" />
@@ -25,6 +26,7 @@
     <None Remove="SharkySettings\SharkySettingsSafetyPage.xaml" />
     <None Remove="SharkySettings\SharkySettingsTroubleshootingPage.xaml" />
     <None Remove="SharkySettings\SharkySettingsUpdatesPage.xaml" />
+    <None Remove="SharkyUser\SharkyUserLibraryBookmarkPage.xaml" />
     <None Remove="SharkyUser\SharkyUserLibraryHistoryPage.xaml" />
     <None Remove="SharkyUser\SharkyUserLibraryView.xaml" />
   </ItemGroup>
@@ -119,6 +121,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Remove="SharkySettingsGeneralPageAddSearchEngineDialog.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="SharkyUser\SharkyUserLibraryBookmarkPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="SharkyBookmarkUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="SharkyUser\SharkyUserLibraryHistoryPage.xaml">

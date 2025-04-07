@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="SharkyBrowser.SharkyBookmarkUI"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkyBrowser"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Width="300" Spacing="12">
+        <TextBox Header="Page title" x:Name="PageTitleTextBox" />
+        <TextBox Header="Page address" x:Name="PageURITextBox" />
+        <StackPanel Orientation="Horizontal" Spacing="6">
+            <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click" />
+            <Button Content="Open bookmarks" x:Name="OpenBookmarksButton" Click="OpenBookmarksButton_Click" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

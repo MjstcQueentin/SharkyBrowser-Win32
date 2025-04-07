@@ -92,8 +92,13 @@
                     </Flyout>
                 </FlyoutBase.AttachedFlyout>
             </Button>
-            <Button Grid.Column="7" x:Name="BookmarkButton" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32" ToolTipService.ToolTip="Bookmark">
-                <FontIcon FontSize="16" Glyph="&#xE734;"></FontIcon>
+            <Button Grid.Column="7" x:Name="BookmarkButton" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="BookmarkButton_Click" Height="32" ToolTipService.ToolTip="Bookmark">
+                <FontIcon FontSize="16" Glyph="&#xE734;" x:Name="BookmarkButtonIcon"></FontIcon>
+                <Button.Flyout>
+                    <Flyout>
+                        <local:SharkyBookmarkUI x:Name="BookmarkUI"/>
+                    </Flyout>
+                </Button.Flyout>
             </Button>
             <Button Grid.Column="8" x:Name="AccountButton" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="FlyoutButton_Click" Height="32" ToolTipService.ToolTip="Account">
                 <FontIcon FontSize="16" Glyph="&#xE77B;"></FontIcon>
