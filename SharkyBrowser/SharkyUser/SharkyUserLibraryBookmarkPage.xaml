@@ -13,7 +13,7 @@
         <ItemsView.ItemTemplate>
             <DataTemplate x:DataType="web:SharkyWebResource">
                 <ItemContainer HorizontalAlignment="Stretch">
-                    <Grid Padding="16" Margin="4" ColumnSpacing="12" Background="{StaticResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                    <Grid Padding="16" Margin="4" ColumnSpacing="12" Background="{StaticResource LayerOnMicaBaseAltFillColorDefaultBrush}" x:Name="ElementGrid" Tag="{x:Bind Uri}" DoubleTapped="ElementGrid_DoubleTapped" IsDoubleTapEnabled="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition />

@@ -169,8 +169,8 @@ namespace SharkyBrowser.SharkyUser
             command.Parameters.AddWithValue("$name", resource.Name);
             command.Parameters.AddWithValue("$uri", resource.Uri.AbsoluteUri);
             command.Parameters.AddWithValue("$icon", resource.Icon is null ? DBNull.Value : resource.Icon.ToString());
-            command.Parameters.AddWithValue("$updateTime", resource.UpdateTime is null || resource.UpdateTime == Double.NaN ? DBNull.Value : resource.UpdateTime);
-            command.Parameters.AddWithValue("$deletionTime", resource.DeletionTime is null || resource.DeletionTime == Double.NaN ? DBNull.Value : resource.DeletionTime);
+            command.Parameters.AddWithValue("$updateTime", resource.UpdateTime is null ? DBNull.Value : resource.UpdateTime);
+            command.Parameters.AddWithValue("$deletionTime", resource.DeletionTime is null ? DBNull.Value : resource.DeletionTime);
             command.ExecuteNonQuery();
         }
 
