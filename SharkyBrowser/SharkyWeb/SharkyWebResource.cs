@@ -67,5 +67,15 @@ namespace SharkyBrowser.SharkyWeb
             Icon = icon;
             UpdateTime = updateTime;
         }
+
+        public SharkyWebResource(string name, string url, long? creationTime, BitmapImage icon, long? updateTime, long? deletionTime)
+        {
+            Name = name;
+            Uri = new Uri(url);
+            CreationTime = creationTime ?? SharkyUtils.DateTimeToUnixTimestamp(DateTime.Now);
+            Icon = icon;
+            UpdateTime = updateTime;
+            DeletionTime = deletionTime;
+        }
     }
 }

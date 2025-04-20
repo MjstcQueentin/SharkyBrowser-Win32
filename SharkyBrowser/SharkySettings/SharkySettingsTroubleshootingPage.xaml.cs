@@ -5,8 +5,10 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using SharkyBrowser.SharkyUser;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,8 +27,15 @@ namespace SharkyBrowser.SharkySettings
     {
         public SharkySettingsTroubleshootingPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             SettingsFileLocationTextBlock.Text = SharkyUserSettings.SettingsFileLocation;
+        }
+
+        private void ResetSharkyDatabaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            SharkyUserDatabase.Instance.NukeLocalDatabase(); 
+            Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+            App.Current.Exit();
         }
     }
 }

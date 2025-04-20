@@ -9,25 +9,37 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <ItemsView Padding="50" x:Name="BookmarkItemsView">
-        <ItemsView.ItemTemplate>
-            <DataTemplate x:DataType="web:SharkyWebResource">
-                <ItemContainer HorizontalAlignment="Stretch">
-                    <Grid Padding="16" Margin="4" ColumnSpacing="12" Background="{StaticResource LayerOnMicaBaseAltFillColorDefaultBrush}" x:Name="ElementGrid" Tag="{x:Bind Uri}" DoubleTapped="ElementGrid_DoubleTapped" IsDoubleTapEnabled="True">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+    <ScrollView>
+        <StackPanel Padding="50">
+            <InfoBar IsOpen="False" x:Name="IsEmptyInfoBar" Severity="Informational" Title="There is no item in your bookmarks." IsClosable="False" />
 
-                        <SymbolIcon Symbol="Globe" Grid.Column="0" />
-                        <TextBlock Grid.Column="1" Text="{x:Bind Name}" />
-                        <TextBlock Grid.Column="2" Text="{x:Bind Uri}" />
-                        <TextBlock Grid.Column="3" Text="{x:Bind CreationDateTime}" />
-                    </Grid>
-                </ItemContainer>
-            </DataTemplate>
-        </ItemsView.ItemTemplate>
-    </ItemsView>
+            <ItemsView Padding="50" x:Name="BookmarkItemsView">
+                <ItemsView.ItemTemplate>
+                    <DataTemplate x:DataType="web:SharkyWebResource">
+                        <ItemContainer HorizontalAlignment="Stretch">
+                            <Grid Padding="16" Margin="4" ColumnSpacing="12" Background="{StaticResource LayerOnMicaBaseAltFillColorDefaultBrush}" x:Name="ElementGrid" Tag="{x:Bind Uri}" DoubleTapped="ElementGrid_DoubleTapped" IsDoubleTapEnabled="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="Open in a new tab" x:Name="OpenInNewTabFlyoutItem" Tag="{x:Bind Uri}" Click="OpenInNewTabFlyoutItem_Click"/>
+                                        <MenuFlyoutItem Text="Delete" x:Name="DeleteFlyoutItem" Tag="{x:Bind CreationTime}" Click="DeleteFlyoutItem_Click"/>
+                                    </MenuFlyout>
+                                </Grid.ContextFlyout>
+
+                                <SymbolIcon Symbol="Globe" Grid.Column="0" />
+                                <TextBlock Grid.Column="1" Text="{x:Bind Name}" />
+                                <TextBlock Grid.Column="2" Text="{x:Bind Uri}" />
+                                <TextBlock Grid.Column="3" Text="{x:Bind CreationDateTime}" />
+                            </Grid>
+                        </ItemContainer>
+                    </DataTemplate>
+                </ItemsView.ItemTemplate>
+            </ItemsView>
+        </StackPanel>
+    </ScrollView>
 </Page>

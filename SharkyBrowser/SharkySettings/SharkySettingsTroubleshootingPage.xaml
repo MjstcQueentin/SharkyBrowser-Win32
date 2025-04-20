@@ -38,6 +38,27 @@
             </Expander.Header>
             <Expander.Content>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                    <Button>
+                        <Button.Content>Reset database</Button.Content>
+                        <Button.Flyout>
+                            <Flyout>
+                                <StackPanel Orientation="Vertical" Spacing="4">
+                                    <TextBlock>
+                                        Resetting Sharky's database will erase local data (history and bookmarks), and restart Sharky.
+                                    </TextBlock>
+                                    <TextBlock>
+                                        If you're connected to MajestiCloud, your synchronized data will be downloaded again.
+                                    </TextBlock>
+                                    <TextBlock FontWeight="Bold">
+                                        This process cannot be canceled.
+                                    </TextBlock>
+                                    <Button x:Name="ResetSharkyDatabaseButton" Click="ResetSharkyDatabaseButton_Click">
+                                        Reset Sharky now
+                                    </Button>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
                 </StackPanel>
             </Expander.Content>
         </Expander>

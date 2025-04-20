@@ -1,5 +1,7 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using SharkyBrowser.SharkyWeb;
+using System.Collections.Generic;
 
 namespace SharkyBrowser.SharkyUser
 {
@@ -8,13 +10,33 @@ namespace SharkyBrowser.SharkyUser
         public SharkyUserLibraryHistoryPage()
         {
             InitializeComponent();
+            FetchData();
+        }
 
-            HistoryItemsView.ItemsSource = SharkyUserDatabase.Instance.GetResources("history");
+        private void FetchData()
+        {
+            List<SharkyWebResource> l = SharkyUserDatabase.Instance.GetResources("history");
+
+            HistoryItemsView.ItemsSource = l;
+            IsEmptyInfoBar.IsOpen = l.Count == 0;
         }
 
         private void ElementGrid_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             SharkyBrowsingService.RequestNewTab(((Grid)sender).Tag.ToString());
+        }
+
+        private void OpenInNewTabFlyoutItem_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            SharkyBrowsingService.RequestNewTab(((MenuFlyoutItem)sender).Tag.ToString());
+        }
+
+        private void DeleteFlyoutItem_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            long itemId = long.Parse(((MenuFlyoutItem)sender).Tag.ToString());
+
+            SharkyUserDatabase.Instance.DeleteResource("history", itemId);
+            FetchData();
         }
     }
 }

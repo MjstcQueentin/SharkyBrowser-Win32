@@ -35,8 +35,8 @@ namespace SharkyBrowser.SharkyUser
             var command = database.CreateCommand();
             command.CommandText = @"CREATE TABLE IF NOT EXISTS history(
                 creationTime BIGINT NOT NULL PRIMARY KEY,
-                name TEXT NOT NULL,
-                uri TEXT NOT NULL,
+                name TEXT NULL,
+                uri TEXT NULL,
                 icon BLOB NULL,
                 updateTime BIGINT NULL,
                 deletionTime BIGINT NULL
@@ -45,8 +45,8 @@ namespace SharkyBrowser.SharkyUser
 
             command.CommandText = @"CREATE TABLE IF NOT EXISTS bookmark(
                 creationTime BIGINT NOT NULL PRIMARY KEY,
-                name TEXT NOT NULL,
-                uri TEXT NOT NULL,
+                name TEXT NULL,
+                uri TEXT NULL,
                 icon BLOB NULL,
                 updateTime BIGINT NULL,
                 deletionTime BIGINT NULL
@@ -76,9 +76,9 @@ namespace SharkyBrowser.SharkyUser
                 list.Add(new SharkyWebResource(
                     reader.GetString(reader.GetOrdinal("name")),
                     reader.GetString(reader.GetOrdinal("uri")),
-                    reader.IsDBNull(4) ? null : reader.GetInt64(reader.GetOrdinal("creationTime")),
+                    reader.IsDBNull(reader.GetOrdinal("creationTime")) ? null : reader.GetInt64(reader.GetOrdinal("creationTime")),
                     null,
-                    reader.IsDBNull(4) ? null : reader.GetInt64(reader.GetOrdinal("updateTime"))
+                    reader.IsDBNull(reader.GetOrdinal("updateTime")) ? null : reader.GetInt64(reader.GetOrdinal("updateTime"))
                 ));
             }
 
@@ -175,14 +175,38 @@ namespace SharkyBrowser.SharkyUser
         }
 
         /// <summary>
+        /// Delete a resource in a table
+        /// </summary>
+        /// <param name="table">Table name</param>
+        /// <param name="creationTime">Creation Timestamp of the resource to delete</param>
+        public void DeleteResource(string table, long creationTime)
+        {
+            var command = database.CreateCommand();
+            command.CommandText = @$"UPDATE {table} SET name = NULL, uri = NULL, icon = NULL, deletionTime = $deletionTime WHERE creationTime = $creationTime";
+            command.Parameters.AddWithValue("$deletionTime", SharkyUtils.DateTimeToUnixTimestamp(DateTime.Now));
+            command.Parameters.AddWithValue("$creationTime", creationTime);
+            command.ExecuteNonQuery();
+        }
+
+        /// <summary>
         /// Deletes all resources from a table
         /// </summary>
         /// <param name="table">Table name</param>
         public void EmptyResources(string table)
         {
             var command = database.CreateCommand();
-            command.CommandText = @$"UPDATE {table} SET deletionTime = $deletionTime WHERE deletionTime IS NULL;";
+            command.CommandText = @$"UPDATE {table} SET name = NULL, uri = NULL, icon = NULL, deletionTime = $deletionTime WHERE deletionTime IS NULL;";
             command.Parameters.AddWithValue("$deletionTime", DateTime.UtcNow.Subtract(DateTime.UnixEpoch).TotalSeconds);
+            command.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Deletes the database structure.
+        /// </summary>
+        public void NukeLocalDatabase()
+        {
+            var command = database.CreateCommand();
+            command.CommandText = "DROP TABLE history; DROP TABLE bookmark;";
             command.ExecuteNonQuery();
         }
     }
