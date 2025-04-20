@@ -24,7 +24,7 @@
                         <SymbolIcon Symbol="Globe" Grid.Column="0" />
                         <TextBlock Grid.Column="1" Text="{x:Bind Name}" />
                         <TextBlock Grid.Column="2" Text="{x:Bind Uri}" />
-                        <TextBlock Grid.Column="3" Text="{x:Bind CreationTime}" />
+                        <TextBlock Grid.Column="3" Text="{x:Bind CreationDateTime}" />
                     </Grid>
                 </ItemContainer>
             </DataTemplate>

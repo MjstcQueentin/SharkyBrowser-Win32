@@ -11,51 +11,59 @@ namespace SharkyBrowser.SharkyWeb
         public BitmapImage? Icon;
 #nullable disable
 
-        public double CreationTime;
-        public double? UpdateTime;
-        public double? DeletionTime;
+        public long CreationTime;
+        public long? UpdateTime;
+        public long? DeletionTime;
+
+        public DateTime CreationDateTime
+        {
+            get
+            {
+                return SharkyUtils.UnixTimestampToDateTime(CreationTime);
+            }
+        }
 
         public SharkyWebResource()
         {
             Name = "Unnamed webpage";
             Uri = new Uri("about:blank");
-            CreationTime = DateTime.UtcNow.Subtract(DateTime.UnixEpoch).TotalSeconds;
+            CreationTime = SharkyUtils.DateTimeToUnixTimestamp(DateTime.Now);
         }
 
         public SharkyWebResource(string name)
         {
             Name = name;
             Uri = new Uri("about:blank");
-            CreationTime = DateTime.UtcNow.Subtract(DateTime.UnixEpoch).TotalSeconds;
+            CreationTime = SharkyUtils.DateTimeToUnixTimestamp(DateTime.Now);
         }
 
         public SharkyWebResource(string name, string url)
         {
             Name = name;
             Uri = new Uri(url);
-            CreationTime = DateTime.UtcNow.Subtract(DateTime.UnixEpoch).TotalSeconds;
+            CreationTime = SharkyUtils.DateTimeToUnixTimestamp(DateTime.Now);
         }
 
-        public SharkyWebResource(string name, string url, double creationTime)
+        public SharkyWebResource(string name, string url, long creationTime)
         {
             Name = name;
             Uri = new Uri(url);
             CreationTime = creationTime;
         }
 
-        public SharkyWebResource(string name, string url, double creationTime, BitmapImage icon)
+        public SharkyWebResource(string name, string url, long? creationTime, BitmapImage icon)
         {
             Name = name;
             Uri = new Uri(url);
-            CreationTime = creationTime;
+            CreationTime = creationTime ?? SharkyUtils.DateTimeToUnixTimestamp(DateTime.Now);
             Icon = icon;
         }
 
-        public SharkyWebResource(string name, string url, double creationTime, BitmapImage icon, double updateTime)
+        public SharkyWebResource(string name, string url, long? creationTime, BitmapImage icon, long? updateTime)
         {
             Name = name;
             Uri = new Uri(url);
-            CreationTime = creationTime;
+            CreationTime = creationTime ?? SharkyUtils.DateTimeToUnixTimestamp(DateTime.Now);
             Icon = icon;
             UpdateTime = updateTime;
         }

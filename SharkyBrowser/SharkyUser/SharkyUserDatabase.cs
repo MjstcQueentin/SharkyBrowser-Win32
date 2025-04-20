@@ -67,18 +67,18 @@ namespace SharkyBrowser.SharkyUser
         public List<SharkyWebResource> GetResources(string table)
         {
             var command = database.CreateCommand();
-            command.CommandText = $@"SELECT name, uri, creationTime, icon, updateTime FROM {table} WHERE deletionTime IS NULL";
+            command.CommandText = $@"SELECT name, uri, creationTime, icon, updateTime FROM {table} WHERE deletionTime IS NULL ORDER BY creationTime DESC";
             SqliteDataReader reader = command.ExecuteReader();
             List<SharkyWebResource> list = new List<SharkyWebResource>();
 
             while (reader.Read())
             {
                 list.Add(new SharkyWebResource(
-                    reader.GetString(0),
-                    reader.GetString(1),
-                    reader.IsDBNull(4) ? Double.NaN : reader.GetDouble(2),
+                    reader.GetString(reader.GetOrdinal("name")),
+                    reader.GetString(reader.GetOrdinal("uri")),
+                    reader.IsDBNull(4) ? null : reader.GetInt64(reader.GetOrdinal("creationTime")),
                     null,
-                    reader.IsDBNull(4) ? Double.NaN : reader.GetDouble(4)
+                    reader.IsDBNull(4) ? null : reader.GetInt64(reader.GetOrdinal("updateTime"))
                 ));
             }
 
@@ -97,9 +97,9 @@ namespace SharkyBrowser.SharkyUser
                 return new SharkyWebResource(
                     reader.GetString(reader.GetOrdinal("name")),
                     reader.GetString(reader.GetOrdinal("uri")),
-                    reader.IsDBNull(reader.GetOrdinal("creationTime")) ? Double.NaN : reader.GetDouble(reader.GetOrdinal("creationTime")),
+                    reader.IsDBNull(reader.GetOrdinal("creationTime")) ? null : reader.GetInt64(reader.GetOrdinal("creationTime")),
                     null,
-                    reader.IsDBNull(reader.GetOrdinal("updateTime")) ? Double.NaN : reader.GetDouble(reader.GetOrdinal("updateTime"))
+                    reader.IsDBNull(reader.GetOrdinal("updateTime")) ? null : reader.GetInt64(reader.GetOrdinal("updateTime"))
                 );
             }
             else
@@ -129,8 +129,8 @@ namespace SharkyBrowser.SharkyUser
             while (reader.Read())
             {
                 list.Add(new SharkyWebResource(
-                    reader.GetString(0),
-                    reader.GetString(1)
+                    reader.GetString(reader.GetOrdinal("name")),
+                    reader.GetString(reader.GetOrdinal("uri"))
                 ));
             }
 

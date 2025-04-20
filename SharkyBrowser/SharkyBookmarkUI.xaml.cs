@@ -46,7 +46,7 @@ namespace SharkyBrowser
             {
                 EditedResource.Name = PageTitleTextBox.Text;
                 EditedResource.Uri = new(PageURITextBox.Text);
-                EditedResource.UpdateTime = DateTime.UtcNow.Subtract(DateTime.UnixEpoch).TotalSeconds;
+                EditedResource.UpdateTime = (long)DateTime.UtcNow.Subtract(DateTime.UnixEpoch).TotalSeconds;
                 SharkyUserDatabase.Instance.UpdateResource("bookmark", EditedResource);
             }
 
