@@ -164,9 +164,14 @@
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem Text="Historique" x:Name="HistoryMenuFlyoutItem" Click="HistoryMenuFlyoutItem_Click">
+                        <MenuFlyoutItem Text="History" x:Name="HistoryMenuFlyoutItem" Click="HistoryMenuFlyoutItem_Click">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon Glyph="&#xE81C;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem Text="Bookmarks" x:Name="BookmarksMenuFlyoutItem" Click="BookmarksMenuFlyoutItem_Click">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE734;" />
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>

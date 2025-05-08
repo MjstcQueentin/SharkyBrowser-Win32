@@ -247,6 +247,11 @@ namespace SharkyBrowser
             ParentWindow.AddTab("sharky:library");
         }
 
+        private void BookmarksMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+            ParentWindow.AddTab("sharky:library/bookmarks");
+        }
+
         private void GetSupportMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
             ParentWindow.AddTab("https://www.lesmajesticiels.org/support/kb/product/browser");
