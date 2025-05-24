@@ -48,17 +48,13 @@
             <Button Grid.Column="3" x:Name="RefreshButton" Click="RefreshButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32" ToolTipService.ToolTip="Refresh">
                 <FontIcon FontSize="16" Glyph="&#xE72C;"></FontIcon>
             </Button>
-            <Button Grid.Column="4" x:Name="SecurityButton" Click="FlyoutButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32" ToolTipService.ToolTip="Security">
+            <Button Grid.Column="4" x:Name="SecurityButton" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32" ToolTipService.ToolTip="Security">
                 <FontIcon FontSize="16" Glyph="&#xEA18;"></FontIcon>
-                <FlyoutBase.AttachedFlyout>
-                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
-                        <MenuFlyoutItem Text="This connection is secure" x:Name="SecurityButtonText">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon Glyph="&#xE72E;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                    </MenuFlyout>
-                </FlyoutBase.AttachedFlyout>
+                <Button.Flyout>
+                    <Flyout>
+                        <local:SharkySecurityUI x:Name="SecurityUI"/>
+                    </Flyout>
+                </Button.Flyout>
             </Button>
             <AutoSuggestBox Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="UrlBox" Margin="4 0"
                 PlaceholderText="Type a search query or a web address"

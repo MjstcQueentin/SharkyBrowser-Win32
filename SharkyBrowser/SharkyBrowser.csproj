@@ -120,6 +120,11 @@
     <Resource Remove="SharkySettingsGeneralPageAddSearchEngineDialog.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="SharkySecurityUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="SharkyUser\SharkyUserLibraryBookmarkPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

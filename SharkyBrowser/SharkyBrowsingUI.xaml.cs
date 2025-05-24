@@ -10,6 +10,7 @@ using System;
 using System.Globalization;
 using System.Reflection;
 using System.Text.Encodings.Web;
+using System.Text.Json;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage.Pickers;
@@ -290,6 +291,13 @@ namespace SharkyBrowser
             sender.CoreWebView2.ServerCertificateErrorDetected += CoreWebView2_ServerCertificateErrorDetected;
             sender.CoreWebView2.DownloadStarting += CoreWebView2_DownloadStarting;
 
+            sender.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.enable", "{}");
+            sender.CoreWebView2.GetDevToolsProtocolEventReceiver("Security.visibleSecurityStateChanged").DevToolsProtocolEventReceived += (sender, args) =>
+            {
+                VisibleSecurityStateChangedEventArgs state = JsonSerializer.Deserialize<VisibleSecurityStateChangedEventArgs>(args.ParameterObjectAsJson);
+                SecurityUI.CurrentVisibleSecurityState = state.VisibleSecurityState;
+            };
+
             // Chemin par défaut pour les téléchargements
             sender.CoreWebView2.Profile.DefaultDownloadFolderPath = SharkyUserSettings.Instance.DownloadLocation;
 
@@ -309,16 +317,6 @@ namespace SharkyBrowser
 
         private void CoreWebView2_ServerCertificateErrorDetected(CoreWebView2 sender, CoreWebView2ServerCertificateErrorDetectedEventArgs args)
         {
-            MainInfoBar.Severity = InfoBarSeverity.Warning;
-            MainInfoBar.Title = "Certificate error";
-            MainInfoBar.Message = args.ErrorStatus.ToString();
-            MainInfoBar.IsOpen = true;
-
-            SecurityButtonText.Text = args.ErrorStatus.ToString();
-            SecurityButtonText.Icon = new FontIcon
-            {
-                Glyph = "\uE785"
-            };
         }
 
         private void CoreWebView2_NewWindowRequested(CoreWebView2 sender, CoreWebView2NewWindowRequestedEventArgs args)
@@ -372,12 +370,6 @@ namespace SharkyBrowser
             ForwardButton.IsEnabled = sender.CanGoForward;
             RefreshButton.IsEnabled = true;
             TheProgressBar.Visibility = Visibility.Collapsed;
-
-            SecurityButtonText.Text = "This connection is secure";
-            SecurityButtonText.Icon = new FontIcon
-            {
-                Glyph = "\uE72E"
-            };
         }
 
         private void TriggerSpecialPage(string pageName)

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="SharkyBrowser.SharkySecurityUI"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkyBrowser"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Width="300" Spacing="12">
+        <TextBlock>Security</TextBlock>
+        <InfoBar IsOpen="True" IsIconVisible="True" IsClosable="False" Severity="Informational" Title="" Message="" x:Name="ServerSecurityInfoBar" />
+        <TextBlock x:Name="IssuerTextBlock"></TextBlock>
+    </StackPanel>
+</UserControl>
