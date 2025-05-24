@@ -26,13 +26,6 @@ namespace SharkyBrowser
 
             AddTab();
             SharkyWebFilter.UpdateLists();
-
-            SharkyBrowsingService.NewTabRequested += SharkyBrowsingService_NewTabRequested;
-        }
-
-        private void SharkyBrowsingService_NewTabRequested(object sender, SharkyBrowsingServiceEventArgs e)
-        {
-            AddTab(e.Uri);
         }
 
         private void MainWindow_SizeChanged(object sender, WindowSizeChangedEventArgs args)

@@ -23,12 +23,10 @@ namespace SharkyBrowser.SharkyUser
 
         private void ElementGrid_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            SharkyBrowsingService.RequestNewTab(((Grid)sender).Tag.ToString());
         }
 
         private void OpenInNewTabFlyoutItem_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            SharkyBrowsingService.RequestNewTab(((MenuFlyoutItem)sender).Tag.ToString());
         }
 
         private void DeleteFlyoutItem_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
