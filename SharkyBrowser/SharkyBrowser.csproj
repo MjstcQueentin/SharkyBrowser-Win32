@@ -10,7 +10,6 @@
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <ApplicationIcon>2019_SmartNetBrowser_Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
@@ -42,7 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.5" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.250108004" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3296.44" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250513003" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4188" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.5" />
     <Manifest Include="$(ApplicationManifest)" />
