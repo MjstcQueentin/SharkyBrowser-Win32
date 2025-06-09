@@ -133,6 +133,14 @@
                                 <SymbolIcon Symbol="OpenFile"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
+                        <MenuFlyoutItem Text="Save As..." x:Name="SaveAsMenuFlyoutItem" Click="SaveAsMenuFlyoutItem_Click">
+                            <MenuFlyoutItem.KeyboardAccelerators>
+                                <KeyboardAccelerator Modifiers="Control" Key="S"/>
+                            </MenuFlyoutItem.KeyboardAccelerators>
+                            <MenuFlyoutItem.Icon>
+                                <SymbolIcon Symbol="Save"/>
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
                         <MenuFlyoutItem Text="Print..." x:Name="PrintMenuFlyoutItem" Click="PrintMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>

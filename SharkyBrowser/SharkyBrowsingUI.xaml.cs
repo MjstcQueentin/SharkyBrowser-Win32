@@ -208,6 +208,11 @@ namespace SharkyBrowser
             }
         }
 
+        private async void SaveAsMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+            await TheWebView.CoreWebView2.ShowSaveAsUIAsync();
+        }
+
         private void PrintMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
             TheWebView.CoreWebView2.ShowPrintUI(CoreWebView2PrintDialogKind.Browser);
