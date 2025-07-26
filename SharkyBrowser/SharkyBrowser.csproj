@@ -11,6 +11,7 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <ApplicationIcon>2019_SmartNetBrowser_Icon.ico</ApplicationIcon>
+    <DefaultLanguage>fr-FR</DefaultLanguage>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="SharkyBookmarkUI.xaml" />

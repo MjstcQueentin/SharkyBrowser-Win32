@@ -108,7 +108,7 @@
                 <FontIcon FontSize="16" Glyph="&#xE700;"></FontIcon>
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout Placement="BottomEdgeAlignedRight">
-                        <MenuFlyoutItem Text="New Tab" x:Name="NewTabMenuFlyoutItem" Click="NewTabMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="NewTab"  x:Name="NewTabMenuFlyoutItem" Click="NewTabMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="T"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -116,7 +116,7 @@
                                 <FontIcon Glyph="&#xE710;"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutItem Text="New Window" x:Name="NewWindowMenuFlyoutItem" Click="NewWindowMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="NewWindow" x:Name="NewWindowMenuFlyoutItem" Click="NewWindowMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="N"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -125,7 +125,7 @@
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem Text="Open..." x:Name="OpenMenuFlyoutItem" Click="OpenMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="Open" x:Name="OpenMenuFlyoutItem" Click="OpenMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="O"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -133,7 +133,7 @@
                                 <SymbolIcon Symbol="OpenFile"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutItem Text="Save As..." x:Name="SaveAsMenuFlyoutItem" Click="SaveAsMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="SaveAs" x:Name="SaveAsMenuFlyoutItem" Click="SaveAsMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="S"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -142,7 +142,7 @@
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem Text="Print..." x:Name="PrintMenuFlyoutItem" Click="PrintMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="Print" x:Name="PrintMenuFlyoutItem" Click="PrintMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="P"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -150,7 +150,7 @@
                                 <SymbolIcon Symbol="Print"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutItem Text="Share..." x:Name="ShareMenuFlyoutItem" Click="ShareMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="Share" x:Name="ShareMenuFlyoutItem" Click="ShareMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control,Shift" Key="S"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -159,7 +159,7 @@
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem Text="Toggle fullscreen" x:Name="FullscreenMenuFlyoutItem" Click="FullscreenMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="ToggleFullscreen" x:Name="FullscreenMenuFlyoutItem" Click="FullscreenMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Key="F11"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -168,23 +168,23 @@
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem Text="History" x:Name="HistoryMenuFlyoutItem" Click="HistoryMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="History" x:Name="HistoryMenuFlyoutItem" Click="HistoryMenuFlyoutItem_Click">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon Glyph="&#xE81C;" />
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutItem Text="Bookmarks" x:Name="BookmarksMenuFlyoutItem" Click="BookmarksMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="Bookmarks" x:Name="BookmarksMenuFlyoutItem" Click="BookmarksMenuFlyoutItem_Click">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon Glyph="&#xE734;" />
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem Text="Settings" x:Name="SettingsMenuFlyoutItem" Click="SettingsMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="Settings" x:Name="SettingsMenuFlyoutItem" Click="SettingsMenuFlyoutItem_Click">
                             <MenuFlyoutItem.Icon>
                                 <SymbolIcon Symbol="Setting"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutSubItem Text="Help">
+                        <MenuFlyoutSubItem x:Uid="Help">
                             <MenuFlyoutSubItem.Icon>
                                 <SymbolIcon Symbol="Help"></SymbolIcon>
                             </MenuFlyoutSubItem.Icon>
@@ -192,7 +192,7 @@
                             <MenuFlyoutItem Text="About Sharky" x:Name="AboutSharkyMenuFlyoutItem" Click="AboutSharkyMenuFlyoutItem_Click"/>
                         </MenuFlyoutSubItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem Text="Close Sharky" x:Name="CloseSharkyMenuFlyoutItem" Click="CloseSharkyMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="CloseSharky" x:Name="CloseSharkyMenuFlyoutItem" Click="CloseSharkyMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="Q"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
