@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using SharkyBrowser.SharkySettings;
+using SharkyBrowser.SharkyWeb;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,6 +36,8 @@ namespace SharkyBrowser
         {
             this.InitializeComponent();
             this.m_windows = new List<MainWindow>();
+
+            SharkyWebFilter.Initialize();
         }
 
         /// <summary>

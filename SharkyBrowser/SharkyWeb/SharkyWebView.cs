@@ -2,7 +2,6 @@
 using Microsoft.UI.Xaml.Media.Imaging;
 using SharkyBrowser.SharkySettings;
 using SharkyBrowser.SharkyUser;
-using System.Linq;
 
 namespace SharkyBrowser.SharkyWeb
 {
@@ -20,6 +19,13 @@ namespace SharkyBrowser.SharkyWeb
         private void SharkyWebView_NavigationStarting(WebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs args)
         {
             CurrentPage = new SharkyWebResource(args.Uri, args.Uri);
+
+            // Annuler la navigation si l'URI correspond à un filtre de contenu
+            if (SharkyWebFilter.TestUri(new System.Uri(args.Uri)))
+            {
+                args.Cancel = true;
+                return;
+            }
         }
 
         private void SharkyWebView_NavigationCompleted(WebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs args)

@@ -25,7 +25,6 @@ namespace SharkyBrowser
             SizeChanged += MainWindow_SizeChanged;
 
             AddTab();
-            SharkyWebFilter.UpdateLists();
         }
 
         private void MainWindow_SizeChanged(object sender, WindowSizeChangedEventArgs args)

@@ -1,9 +1,6 @@
-﻿using System;
+﻿using SharkyBrowser.SharkyFilter;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharkyBrowser.SharkyWeb
 {
@@ -12,38 +9,27 @@ namespace SharkyBrowser.SharkyWeb
     /// </summary>
     internal class SharkyWebFilter
     {
-        private static List<string> AdultBlacklist;
-        private static List<string> BadwareBlacklist;
-        private static List<string> AdvertisementBlacklist;
-        private static List<string> AnnoyanceBlacklist;
+        private static List<SharkyDomainFilter> DomainFilters;
 
-        /// <summary>
-        /// Updates lists for use by content filters
-        /// </summary>
-        public static async void UpdateLists()
+        public static void Initialize()
         {
-            HttpClient client = new();
-            try
-            {
-                HttpResponseMessage adultMsg = await client.GetAsync("http://api-sharky.lesmajesticiels.localhost/lists/adult.txt");
-                string adultDomains = await adultMsg.Content.ReadAsStringAsync();
-
-                AdultBlacklist = adultDomains.Split(",").ToList();
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
+            DomainFilters = [new("", "http://sharky.lesmajesticiels.org/lists/domains/adult.txt")];
         }
 
-        public static bool CheckList(string query)
+        /// <summary>
+        /// Teste si une URI devrait être bloquée ou non.
+        /// </summary>
+        /// <param name="uri">URI a tester</param>
+        /// <returns>TRUE si l'URI matche avec au moins un filtre, FALSE sinon</returns>
+        public static bool TestUri(Uri uri)
         {
-            if (string.IsNullOrWhiteSpace(query)) return false;
-
-            if (AdultBlacklist.Exists(domain => domain.Contains(query)))
+            // Tester d'abord le domaine
+            foreach (var item in DomainFilters)
             {
-                return true;
+                if (item.TestDomain(uri.Host)) return true;
             }
 
+            // Aucun filtre n'a matché
             return false;
         }
     }
