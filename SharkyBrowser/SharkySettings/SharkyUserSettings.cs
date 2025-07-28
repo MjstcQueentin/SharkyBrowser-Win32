@@ -41,6 +41,11 @@ namespace SharkyBrowser.SharkySettings
         public string GlobalCookiePolicy = "Accept";
         public bool DNT = true;
 
+        /// <summary>
+        /// Bloquer la navigation vers les sites pour adultes
+        /// </summary>
+        public bool BlockAdultWebsites = false;
+
         public string AcceptLanguage = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
 
         public void WriteToFile()

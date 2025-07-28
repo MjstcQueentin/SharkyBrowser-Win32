@@ -60,37 +60,6 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <FontIcon Grid.Column="0" Grid.RowSpan="2" Glyph="&#xED54;"/>
-                    <TextBlock Grid.Column="1" Grid.Row="0">ChildGuard</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
-                        Protect your children against the Web's sensitive content
-                    </TextBlock>
-                </Grid>
-            </Expander.Header>
-            <Expander.Content>
-                <StackPanel Orientation="Vertical" Padding="4 0">
-
-                </StackPanel>
-            </Expander.Content>
-        </Expander>
-
-        <Expander
-            IsExpanded="False"
-            ExpandDirection="Down"
-            HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Left">
-            <Expander.Header>
-                <Grid>
-                    <Grid.ColumnSpacing>16</Grid.ColumnSpacing>
-                    <Grid.Padding>0 16</Grid.Padding>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
                     <FontIcon Grid.Column="0" Grid.RowSpan="2" Glyph="&#xE72E;"/>
                     <TextBlock Grid.Column="1" Grid.Row="0">General password</TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">

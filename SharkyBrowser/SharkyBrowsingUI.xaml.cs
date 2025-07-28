@@ -44,9 +44,10 @@ namespace SharkyBrowser
                 {
                     CoreWebView2EnvironmentOptions coreViewOptions = new()
                     {
-                        AdditionalBrowserArguments = "--disable-features=msSmartScreenProtection",
+                        AdditionalBrowserArguments = "--disable-features=msSmartScreenProtection --disable-extensions",
                         Language = CultureInfo.InstalledUICulture.Name,
-                        EnableTrackingPrevention = SharkyUserSettings.Instance.DNT
+                        EnableTrackingPrevention = SharkyUserSettings.Instance.DNT,
+                        AreBrowserExtensionsEnabled = false
                     };
 
                     await TheWebView.EnsureCoreWebView2Async(await CoreWebView2Environment.CreateWithOptionsAsync("", "", coreViewOptions));

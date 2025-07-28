@@ -93,6 +93,8 @@ namespace SharkyBrowser
                 }
             }
 
+            SharkyUserSettings.Instance.WriteToFile();
+
             for(int i = m_windows.Count -1; i >= 0; i--)
             {
                 m_windows[i].ForceClose();

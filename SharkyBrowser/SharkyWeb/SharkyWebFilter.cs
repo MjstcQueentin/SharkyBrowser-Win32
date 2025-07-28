@@ -1,4 +1,5 @@
 ﻿using SharkyBrowser.SharkyFilter;
+using SharkyBrowser.SharkySettings;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +14,12 @@ namespace SharkyBrowser.SharkyWeb
 
         public static void Initialize()
         {
-            DomainFilters = [new("", "http://sharky.lesmajesticiels.org/lists/domains/adult.txt")];
+            DomainFilters = [];
+
+            if(SharkyUserSettings.Instance.BlockAdultWebsites)
+            {
+                DomainFilters.Add(new("", "http://sharky.lesmajesticiels.org/lists/domains/adult.txt"));
+            }
         }
 
         /// <summary>
