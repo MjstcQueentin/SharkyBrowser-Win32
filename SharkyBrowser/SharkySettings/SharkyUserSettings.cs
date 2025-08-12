@@ -39,7 +39,16 @@ namespace SharkyBrowser.SharkySettings
         public bool MultipleTabWarningOnClose = true;
 
         public string GlobalCookiePolicy = "Accept";
-        public bool DNT = true;
+
+        /// <summary>
+        /// Envoyer les entêtes anti tracking (Do Not Track)
+        /// </summary>
+        public bool SendDNTHeaders = true;
+
+        /// <summary>
+        /// Bloquer les requêtes vers des sites connus pour le tracking
+        /// </summary>
+        public bool BlockTrackingRequests = false;
 
         /// <summary>
         /// Bloquer la navigation vers les sites pour adultes

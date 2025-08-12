@@ -30,6 +30,11 @@ namespace SharkyBrowser.SharkyWeb
             {
                 DomainFilters.Add(new("", "http://sharky.lesmajesticiels.org/lists/domains/annoyance.txt"));
             }
+
+            if(SharkyUserSettings.Instance.BlockTrackingRequests)
+            {
+                DomainFilters.Add(new("", "http://sharky.lesmajesticiels.org/lists/domains/tracking.txt"));
+            }
         }
 
         /// <summary>

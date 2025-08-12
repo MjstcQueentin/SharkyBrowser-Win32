@@ -7,7 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="Transparent">
+    Background="Transparent"
+    Unloaded="SharkySettingsPrivacyPage_Unloaded">
 
     <StackPanel Padding="24 16" Spacing="4">
         <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0 0 0 16">Privacy</TextBlock>
@@ -77,9 +78,18 @@
                         IsOpen="True" 
                         Severity="Informational" 
                         IsClosable="False"
-                        Message="Please remember that even if this setting is enabled and the header is sent, the websites you visit are not forced to respect it in any technical nor legal way."/>
+                        Message="Please remember that even if the following setting is enabled and the headers are sent, the websites you visit are not forced to respect it in any technical nor legal way."/>
                     <CheckBox x:Name="DNTCheckBox" Checked="DNTCheckBox_Checked" Unchecked="DNTCheckBox_Unchecked">
-                        Enable Tracking Prevention
+                        Send anti-tracking headers to websites you visit
+                    </CheckBox>
+
+                    <InfoBar 
+                        IsOpen="True" 
+                        Severity="Informational" 
+                        IsClosable="False"
+                        Message="This tracker blocking may be more effective, but some websites might break when it is enabled."/>
+                    <CheckBox x:Name="BlockTrackingDomainsCheckbox" Checked="BlockTrackingDomainsCheckbox_Checked" Unchecked="BlockTrackingDomainsCheckbox_Unchecked">
+                        Block requests to domains known for tracking
                     </CheckBox>
                 </StackPanel>
             </Expander.Content>

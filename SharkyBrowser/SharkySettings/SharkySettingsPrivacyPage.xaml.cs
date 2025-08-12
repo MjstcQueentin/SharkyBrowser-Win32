@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using SharkyBrowser.SharkyUser;
+using SharkyBrowser.SharkyWeb;
 using System;
 using Windows.UI.Popups;
 
@@ -25,7 +26,14 @@ namespace SharkyBrowser.SharkySettings
                     break;
             }
 
-            DNTCheckBox.IsChecked = SharkyUserSettings.Instance.DNT;
+            DNTCheckBox.IsChecked = SharkyUserSettings.Instance.SendDNTHeaders;
+            BlockTrackingDomainsCheckbox.IsChecked = SharkyUserSettings.Instance.BlockTrackingRequests;
+        }
+
+        private void SharkySettingsPrivacyPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            SharkyUserSettings.Instance.WriteToFile();
+            SharkyWebFilter.Initialize();
         }
 
         private void CookiePolicyRadioButtons_SelectionChanged(object sender, RoutedEventArgs e)
@@ -34,19 +42,26 @@ namespace SharkyBrowser.SharkySettings
             string choosenPolicy = (string)checkedRadio.Tag;
 
             SharkyUserSettings.Instance.GlobalCookiePolicy = choosenPolicy;
-            SharkyUserSettings.Instance.WriteToFile();
         }
 
         private void DNTCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            SharkyUserSettings.Instance.DNT = true;
-            SharkyUserSettings.Instance.WriteToFile();
+            SharkyUserSettings.Instance.SendDNTHeaders = true;
         }
 
         private void DNTCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            SharkyUserSettings.Instance.DNT = false;
-            SharkyUserSettings.Instance.WriteToFile();
+            SharkyUserSettings.Instance.SendDNTHeaders = false;
+        }
+
+        private void BlockTrackingDomainsCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+            SharkyUserSettings.Instance.BlockTrackingRequests = true;
+        }
+
+        private void BlockTrackingDomainsCheckbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SharkyUserSettings.Instance.BlockTrackingRequests = false;
         }
 
         private void EraseBrowsingHistoryButton_Click(object sender, RoutedEventArgs e)

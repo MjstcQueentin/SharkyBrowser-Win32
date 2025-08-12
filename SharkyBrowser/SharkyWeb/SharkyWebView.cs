@@ -70,7 +70,7 @@ namespace SharkyBrowser.SharkyWeb
             }
             else
             {
-                if (SharkyUserSettings.Instance.DNT)
+                if (SharkyUserSettings.Instance.SendDNTHeaders)
                 {
                     args.Request.Headers.SetHeader("DNT", "1");
                     args.Request.Headers.SetHeader("Sec-GPC", "1");

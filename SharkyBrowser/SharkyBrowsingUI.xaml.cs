@@ -46,7 +46,7 @@ namespace SharkyBrowser
                     {
                         AdditionalBrowserArguments = "--disable-features=msSmartScreenProtection --disable-extensions",
                         Language = CultureInfo.InstalledUICulture.Name,
-                        EnableTrackingPrevention = SharkyUserSettings.Instance.DNT,
+                        EnableTrackingPrevention = SharkyUserSettings.Instance.SendDNTHeaders,
                         AreBrowserExtensionsEnabled = false
                     };
 
