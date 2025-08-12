@@ -63,6 +63,9 @@ namespace SharkyBrowser.SharkyFilter
 
                 Blacklist = [.. domains.Split(",")];
 
+                // Retirer les chaînes vides
+                Blacklist = [.. Blacklist.Where(d => !string.IsNullOrEmpty(d))];
+
                 // Enregistrer la liste noire dans le chemin local
                 if (!string.IsNullOrEmpty(BlacklistLocalPath))
                 {

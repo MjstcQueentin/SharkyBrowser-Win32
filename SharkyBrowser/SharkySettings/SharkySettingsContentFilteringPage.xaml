@@ -38,7 +38,9 @@
             </Expander.Header>
             <Expander.Content>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                    
+                    <StackPanel Orientation="Vertical" Padding="4 0">
+                        <CheckBox Content="Block advertisements" x:Name="BlockAdvertisementsCheckbox" Checked="BlockAdvertisementsCheckbox_Checked" Unchecked="BlockAdvertisementsCheckbox_Unchecked" />
+                    </StackPanel>
                 </StackPanel>
             </Expander.Content>
         </Expander>
@@ -69,7 +71,9 @@
             </Expander.Header>
             <Expander.Content>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-
+                    <StackPanel Orientation="Vertical" Padding="4 0">
+                        <CheckBox Content="Block annoying content" x:Name="BlockAnnoyingContentCheckbox" Checked="BlockAnnoyingContentCheckbox_Checked" Unchecked="BlockAnnoyingContentCheckbox_Unchecked" />
+                    </StackPanel>
                 </StackPanel>
             </Expander.Content>
         </Expander>

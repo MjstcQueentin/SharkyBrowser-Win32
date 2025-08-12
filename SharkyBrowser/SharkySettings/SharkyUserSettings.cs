@@ -46,6 +46,21 @@ namespace SharkyBrowser.SharkySettings
         /// </summary>
         public bool BlockAdultWebsites = false;
 
+        /// <summary>
+        /// Bloquer les publicités
+        /// </summary>
+        public bool BlockAdvertisements = false;
+
+        /// <summary>
+        /// Bloquer le contenu parasite
+        /// </summary>
+        public bool BlockAnnoyances = false;
+
+        /// <summary>
+        /// Bloquer les sites malveillants
+        /// </summary>
+        public bool BlockBadware = true;
+
         public string AcceptLanguage = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
 
         public void WriteToFile()

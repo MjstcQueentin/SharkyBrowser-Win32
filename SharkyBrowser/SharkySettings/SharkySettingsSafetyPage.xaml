@@ -7,7 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="Transparent">
+    Background="Transparent"
+    Unloaded="SharkySettingsSafetyPage_Unloaded">
 
     <StackPanel Padding="24 16" Spacing="4">
         <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0 0 0 16">Safety</TextBlock>
@@ -30,15 +31,17 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <FontIcon Grid.Column="0" Grid.RowSpan="2" Glyph="&#xea18;"/>
-                    <TextBlock Grid.Column="1" Grid.Row="0">Safe browsing</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Malware blocker</TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
-                        Manage the Safe Browsing service
+                        Define Sharky's behaviour regarding websites that are known for malware distribution
                     </TextBlock>
                 </Grid>
             </Expander.Header>
             <Expander.Content>
-                <StackPanel Orientation="Vertical" Padding="4 0">
-                    
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical" Padding="4 0">
+                        <CheckBox Content="Block malware websites" x:Name="BlockMalwareCheckbox" Checked="BlockMalwareCheckbox_Checked" Unchecked="BlockMalwareCheckbox_Unchecked" />
+                    </StackPanel>
                 </StackPanel>
             </Expander.Content>
         </Expander>

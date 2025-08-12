@@ -63,13 +63,21 @@ namespace SharkyBrowser.SharkyWeb
 
         private void CoreWebView2_WebResourceRequested(Microsoft.Web.WebView2.Core.CoreWebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2WebResourceRequestedEventArgs args)
         {
-            if (SharkyUserSettings.Instance.DNT)
+            // Si l'URI correspond à un filtre de contenu, annuler la requête en falsifiant la réponse
+            if (SharkyWebFilter.TestUri(new System.Uri(args.Request.Uri)))
             {
-                args.Request.Headers.SetHeader("DNT", "1");
-                args.Request.Headers.SetHeader("Sec-GPC", "1");
+                args.Response = CoreWebView2.Environment.CreateWebResourceResponse(null, 400, "Request canceled", null);
             }
+            else
+            {
+                if (SharkyUserSettings.Instance.DNT)
+                {
+                    args.Request.Headers.SetHeader("DNT", "1");
+                    args.Request.Headers.SetHeader("Sec-GPC", "1");
+                }
 
-            args.Request.Headers.SetHeader("Accept-Language", SharkyUserSettings.Instance.AcceptLanguage);
+                args.Request.Headers.SetHeader("Accept-Language", SharkyUserSettings.Instance.AcceptLanguage);
+            }
         }
     }
 }

@@ -20,6 +20,16 @@ namespace SharkyBrowser.SharkyWeb
             {
                 DomainFilters.Add(new("", "http://sharky.lesmajesticiels.org/lists/domains/adult.txt"));
             }
+
+            if(SharkyUserSettings.Instance.BlockAdvertisements)
+            {
+                DomainFilters.Add(new("", "http://sharky.lesmajesticiels.org/lists/domains/advertisement.txt"));
+            }
+
+            if(SharkyUserSettings.Instance.BlockAnnoyances)
+            {
+                DomainFilters.Add(new("", "http://sharky.lesmajesticiels.org/lists/domains/annoyance.txt"));
+            }
         }
 
         /// <summary>
