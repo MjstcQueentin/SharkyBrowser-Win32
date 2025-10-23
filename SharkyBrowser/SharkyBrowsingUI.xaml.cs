@@ -297,7 +297,7 @@ namespace SharkyBrowser
             sender.CoreWebView2.ServerCertificateErrorDetected += CoreWebView2_ServerCertificateErrorDetected;
             sender.CoreWebView2.DownloadStarting += CoreWebView2_DownloadStarting;
 
-            sender.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.enable", "{}");
+            _ = sender.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.enable", "{}");
             sender.CoreWebView2.GetDevToolsProtocolEventReceiver("Security.visibleSecurityStateChanged").DevToolsProtocolEventReceived += (sender, args) =>
             {
                 VisibleSecurityStateChangedEventArgs state = JsonSerializer.Deserialize<VisibleSecurityStateChangedEventArgs>(args.ParameterObjectAsJson);

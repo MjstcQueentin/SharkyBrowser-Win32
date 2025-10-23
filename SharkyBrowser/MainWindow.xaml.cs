@@ -11,8 +11,8 @@ namespace SharkyBrowser
     public sealed partial class MainWindow : Window
     {
         public App ParentApp;
-        private List<SharkyBrowsingUI> ClosedTabs = new();
-        private SharkyUserSettings UserSettings = SharkyUserSettings.Instance;
+        private readonly List<SharkyBrowsingUI> ClosedTabs = [];
+        private readonly SharkyUserSettings UserSettings = SharkyUserSettings.Instance;
 
         public MainWindow()
         {
@@ -75,7 +75,7 @@ namespace SharkyBrowser
 
         public void AddTab(string uri = null, bool selectNewTab = true)
         {
-            if (uri == null) uri = UserSettings.Homepage;
+            uri ??= UserSettings.Homepage;
             SharkyBrowsingUI newBrowser = new(uri);
             newBrowser.NewTabRequested += (sender, args) => {
                 AddTab(args.Uri, args.IsUserInitiated);
@@ -100,7 +100,7 @@ namespace SharkyBrowser
         {
             if(ClosedTabs.Count > 0)
             {
-                SharkyBrowsingUI lastBrowser = ClosedTabs[ClosedTabs.Count - 1];
+                SharkyBrowsingUI lastBrowser = ClosedTabs[^1];
                 TabViewItem newTab = new()
                 {
                     IconSource = new SymbolIconSource() { Symbol = Symbol.Globe },

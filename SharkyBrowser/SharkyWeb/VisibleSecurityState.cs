@@ -14,10 +14,10 @@ namespace SharkyBrowser.SharkyWeb
         public string SecurityState { get; set; }
 
         [JsonPropertyName("certificateSecurityState")]
-        public CertificateSecurityState? CertificateSecurityState { get; set; }
+        public CertificateSecurityState CertificateSecurityState { get; set; }
 
         [JsonPropertyName("safetyTipInfo")]
-        public SafetyTipInfo? SafetyTipInfo { get; set; }
+        public SafetyTipInfo SafetyTipInfo { get; set; }
 
         [JsonPropertyName("securityStateIssueIds")]
         public string[] SecurityStateIssueIDs { get; set; }
