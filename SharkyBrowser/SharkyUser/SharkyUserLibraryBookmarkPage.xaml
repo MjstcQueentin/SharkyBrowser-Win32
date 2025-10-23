@@ -27,7 +27,7 @@
                                 <Grid.ContextFlyout>
                                     <MenuFlyout>
                                         <MenuFlyoutItem Text="Open in a new tab" x:Name="OpenInNewTabFlyoutItem" Tag="{x:Bind Uri}" Click="OpenInNewTabFlyoutItem_Click"/>
-                                        <MenuFlyoutItem Text="Delete" x:Name="DeleteFlyoutItem" Tag="{x:Bind CreationTime}" Click="DeleteFlyoutItem_Click"/>
+                                        <MenuFlyoutItem Text="Delete" x:Name="DeleteFlyoutItem" Tag="{x:Bind ID}" Click="DeleteFlyoutItem_Click"/>
                                     </MenuFlyout>
                                 </Grid.ContextFlyout>
 

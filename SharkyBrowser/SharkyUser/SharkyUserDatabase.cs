@@ -2,6 +2,7 @@
 using SharkyBrowser.SharkyWeb;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 
 namespace SharkyBrowser.SharkyUser
 {
@@ -15,42 +16,56 @@ namespace SharkyBrowser.SharkyUser
         {
             get
             {
-                if (CurrentInstance == null)
-                {
-                    CurrentInstance = new SharkyUserDatabase();
-                }
+                CurrentInstance ??= new SharkyUserDatabase();
 
                 return CurrentInstance;
             }
         }
 
-        private SqliteConnection database;
+        private readonly SqliteConnection database;
 
         public SharkyUserDatabase()
         {
             string dbPath = string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "\\Sharky\\userdatabase.db");
             database = new SqliteConnection($"Data Source={dbPath}");
             database.Open();
-
             var command = database.CreateCommand();
-            command.CommandText = @"CREATE TABLE IF NOT EXISTS history(
-                creationTime BIGINT NOT NULL PRIMARY KEY,
-                name TEXT NULL,
-                uri TEXT NULL,
-                icon BLOB NULL,
-                updateTime BIGINT NULL,
-                deletionTime BIGINT NULL
-            );";
-            command.ExecuteNonQuery();
 
-            command.CommandText = @"CREATE TABLE IF NOT EXISTS bookmark(
-                creationTime BIGINT NOT NULL PRIMARY KEY,
-                name TEXT NULL,
-                uri TEXT NULL,
-                icon BLOB NULL,
-                updateTime BIGINT NULL,
-                deletionTime BIGINT NULL
-            );";
+            command.CommandText = "PRAGMA user_version;";
+            var reader = command.ExecuteReader();
+            reader.Read();
+            int databaseVersion = reader.GetInt32(0);
+            reader.Close();
+
+            if(databaseVersion < 2)
+            {
+                command.CommandText = "DROP TABLE IF EXISTS history; DROP TABLE IF EXISTS bookmark;";
+                command.ExecuteNonQuery();
+
+                command.CommandText = @"CREATE TABLE IF NOT EXISTS history(
+                    id TEXT NOT NULL PRIMARY KEY,
+                    name TEXT NULL,
+                    uri TEXT NULL,
+                    icon BLOB NULL,
+                    creationTime BIGINT NOT NULL,
+                    updateTime BIGINT NULL,
+                    deletionTime BIGINT NULL
+                );";
+                command.ExecuteNonQuery();
+
+                command.CommandText = @"CREATE TABLE IF NOT EXISTS bookmark(
+                    id TEXT NOT NULL PRIMARY KEY,
+                    name TEXT NULL,
+                    uri TEXT NULL,
+                    icon BLOB NULL,
+                    creationTime BIGINT NOT NULL,
+                    updateTime BIGINT NULL,
+                    deletionTime BIGINT NULL
+                );";
+                command.ExecuteNonQuery();
+            }
+
+            command.CommandText = "PRAGMA user_version = 2;";
             command.ExecuteNonQuery();
         }
 
@@ -67,40 +82,30 @@ namespace SharkyBrowser.SharkyUser
         public List<SharkyWebResource> GetResources(string table)
         {
             var command = database.CreateCommand();
-            command.CommandText = $@"SELECT name, uri, creationTime, icon, updateTime FROM {table} WHERE deletionTime IS NULL ORDER BY creationTime DESC";
+            command.CommandText = $@"SELECT * FROM {table} WHERE deletionTime IS NULL ORDER BY creationTime DESC";
             SqliteDataReader reader = command.ExecuteReader();
-            List<SharkyWebResource> list = new List<SharkyWebResource>();
-
-            while (reader.Read())
-            {
-                list.Add(new SharkyWebResource(
-                    reader.GetString(reader.GetOrdinal("name")),
-                    reader.GetString(reader.GetOrdinal("uri")),
-                    reader.IsDBNull(reader.GetOrdinal("creationTime")) ? null : reader.GetInt64(reader.GetOrdinal("creationTime")),
-                    null,
-                    reader.IsDBNull(reader.GetOrdinal("updateTime")) ? null : reader.GetInt64(reader.GetOrdinal("updateTime"))
-                ));
-            }
-
-            return list;
+            return SharkyWebResource.ListFromSqliteReader(reader);
         }
 
         public SharkyWebResource GetResourceByURI(string table, string uri)
         {
             var command = database.CreateCommand();
-            command.CommandText = $@"SELECT name, uri, icon, creationTime, updateTime FROM {table} WHERE uri = $uri AND deletionTime IS NULL";
+            command.CommandText = $@"SELECT id, name, uri, icon, creationTime, updateTime FROM {table} WHERE uri = $uri AND deletionTime IS NULL";
             command.Parameters.AddWithValue("$uri", uri);
             SqliteDataReader reader = command.ExecuteReader();
 
             if (reader.Read())
             {
-                return new SharkyWebResource(
-                    reader.GetString(reader.GetOrdinal("name")),
-                    reader.GetString(reader.GetOrdinal("uri")),
-                    reader.IsDBNull(reader.GetOrdinal("creationTime")) ? null : reader.GetInt64(reader.GetOrdinal("creationTime")),
-                    null,
-                    reader.IsDBNull(reader.GetOrdinal("updateTime")) ? null : reader.GetInt64(reader.GetOrdinal("updateTime"))
-                );
+                SharkyWebResource resource = new()
+                {
+                    ID = reader.GetString(reader.GetOrdinal("id")),
+                    Name = reader.GetString(reader.GetOrdinal("name")),
+                    Uri = new Uri(reader.GetString(reader.GetOrdinal("uri"))),
+                    CreationTime = reader.GetInt64(reader.GetOrdinal("creationTime")),
+                    UpdateTime = reader.IsDBNull(reader.GetOrdinal("updateTime")) ? null : reader.GetInt64(reader.GetOrdinal("updateTime"))
+                };
+
+                return resource;
             }
             else
             {
@@ -124,17 +129,18 @@ namespace SharkyBrowser.SharkyUser
             }
 
             SqliteDataReader reader = command.ExecuteReader();
-            List<SharkyWebResource> list = new List<SharkyWebResource>();
-
+            List<SharkyWebResource> resources = [];
             while (reader.Read())
             {
-                list.Add(new SharkyWebResource(
-                    reader.GetString(reader.GetOrdinal("name")),
-                    reader.GetString(reader.GetOrdinal("uri"))
-                ));
+                SharkyWebResource r = new()
+                {
+                    Name = reader.IsDBNull(reader.GetOrdinal("name")) ? "Unnamed webpage" : reader.GetString(reader.GetOrdinal("name")),
+                    Uri = new Uri(reader.IsDBNull(reader.GetOrdinal("uri")) ? "about:blank" : reader.GetString(reader.GetOrdinal("uri")))
+                };
+                resources.Add(r);
             }
 
-            return list;
+            return resources;
         }
 
         /// <summary>
@@ -145,12 +151,13 @@ namespace SharkyBrowser.SharkyUser
         public void InsertResource(string table, SharkyWebResource resource)
         {
             var command = database.CreateCommand();
-            command.CommandText = @$"INSERT INTO {table}(creationTime, name, uri, icon, updateTime, deletionTime) 
-                VALUES($creationTime, $name, $uri, $icon, $updateTime, $deletionTime);";
-            command.Parameters.AddWithValue("$creationTime", resource.CreationTime);
+            command.CommandText = @$"INSERT INTO {table}(id, name, uri, icon, creationTime, updateTime, deletionTime) 
+                VALUES($id, $name, $uri, $icon, $creationTime, $updateTime, $deletionTime);";
+            command.Parameters.AddWithValue("$id", resource.ID);
             command.Parameters.AddWithValue("$name", resource.Name);
             command.Parameters.AddWithValue("$uri", resource.Uri.AbsoluteUri);
             command.Parameters.AddWithValue("$icon", resource.Icon is null ? DBNull.Value : resource.Icon.ToString());
+            command.Parameters.AddWithValue("$creationTime", resource.CreationTime);
             command.Parameters.AddWithValue("$updateTime", resource.UpdateTime is null ? DBNull.Value : resource.UpdateTime);
             command.Parameters.AddWithValue("$deletionTime", resource.DeletionTime is null ? DBNull.Value : resource.DeletionTime);
             command.ExecuteNonQuery();
@@ -164,11 +171,12 @@ namespace SharkyBrowser.SharkyUser
         public void UpdateResource(string table, SharkyWebResource resource)
         {
             var command = database.CreateCommand();
-            command.CommandText = @$"UPDATE {table} SET name = $name, uri = $uri, icon = $icon, updateTime = $updateTime, deletionTime = $deletionTime WHERE creationTime = $creationTime";
-            command.Parameters.AddWithValue("$creationTime", resource.CreationTime);
+            command.CommandText = @$"UPDATE {table} SET name = $name, uri = $uri, icon = $icon, creationTime = $creationTime, updateTime = $updateTime, deletionTime = $deletionTime WHERE id = $id";
+            command.Parameters.AddWithValue("$id", resource.ID);
             command.Parameters.AddWithValue("$name", resource.Name);
             command.Parameters.AddWithValue("$uri", resource.Uri.AbsoluteUri);
             command.Parameters.AddWithValue("$icon", resource.Icon is null ? DBNull.Value : resource.Icon.ToString());
+            command.Parameters.AddWithValue("$creationTime", resource.CreationTime);
             command.Parameters.AddWithValue("$updateTime", resource.UpdateTime is null ? DBNull.Value : resource.UpdateTime);
             command.Parameters.AddWithValue("$deletionTime", resource.DeletionTime is null ? DBNull.Value : resource.DeletionTime);
             command.ExecuteNonQuery();
@@ -178,13 +186,13 @@ namespace SharkyBrowser.SharkyUser
         /// Delete a resource in a table
         /// </summary>
         /// <param name="table">Table name</param>
-        /// <param name="creationTime">Creation Timestamp of the resource to delete</param>
-        public void DeleteResource(string table, long creationTime)
+        /// <param name="id">ID of the resource to delete</param>
+        public void DeleteResource(string table, string id)
         {
             var command = database.CreateCommand();
-            command.CommandText = @$"UPDATE {table} SET name = NULL, uri = NULL, icon = NULL, deletionTime = $deletionTime WHERE creationTime = $creationTime";
+            command.CommandText = @$"UPDATE {table} SET name = NULL, uri = NULL, icon = NULL, deletionTime = $deletionTime WHERE id = $id";
             command.Parameters.AddWithValue("$deletionTime", SharkyUtils.DateTimeToUnixTimestamp(DateTime.Now));
-            command.Parameters.AddWithValue("$creationTime", creationTime);
+            command.Parameters.AddWithValue("id", id);
             command.ExecuteNonQuery();
         }
 

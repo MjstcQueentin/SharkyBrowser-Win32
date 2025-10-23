@@ -31,7 +31,7 @@ namespace SharkyBrowser.SharkyUser
 
         private void DeleteFlyoutItem_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            long itemId = long.Parse(((MenuFlyoutItem)sender).Tag.ToString());
+            string itemId = ((MenuFlyoutItem)sender).Tag.ToString();
 
             SharkyUserDatabase.Instance.DeleteResource("history", itemId);
             FetchData();

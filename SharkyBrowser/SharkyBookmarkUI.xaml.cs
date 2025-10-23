@@ -40,7 +40,11 @@ namespace SharkyBrowser
         {
             if (mode == "add")
             {
-                SharkyUserDatabase.Instance.InsertResource("bookmark", new(PageTitleTextBox.Text, PageURITextBox.Text));
+                SharkyUserDatabase.Instance.InsertResource("bookmark", new()
+                {
+                    Name = PageTitleTextBox.Text,
+                    Uri = new(PageURITextBox.Text),
+                });
             }
             else
             {

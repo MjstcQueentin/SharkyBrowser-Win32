@@ -18,7 +18,11 @@ namespace SharkyBrowser.SharkyWeb
 
         private void SharkyWebView_NavigationStarting(WebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs args)
         {
-            CurrentPage = new SharkyWebResource(args.Uri, args.Uri);
+            CurrentPage = new()
+            {
+                Name = args.Uri,
+                Uri = new System.Uri(args.Uri)
+            };
 
             // Annuler la navigation si l'URI correspond à un filtre de contenu
             if (SharkyWebFilter.TestUri(new System.Uri(args.Uri)))
