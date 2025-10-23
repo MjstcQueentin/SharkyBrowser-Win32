@@ -395,7 +395,9 @@ namespace SharkyBrowser
             }
             else if (pageName.StartsWith("library"))
             {
-                ContentFrame.NavigateToType(typeof(SharkyUserLibraryView), null, new());
+                string secondPart = pageName.Contains('/') ? pageName.Substring(pageName.IndexOf('/') + 1) : null;
+
+                ContentFrame.NavigateToType(typeof(SharkyUserLibraryView), secondPart, new());
                 ParentTab.Header = "Sharky Library";
                 ParentTab.IconSource = new SymbolIconSource() { Symbol = Symbol.Library };
                 ParentWindow.Title = string.Concat("Sharky Library | Sharky");
@@ -411,6 +413,7 @@ namespace SharkyBrowser
 
         private void RemoveSpecialPage()
         {
+            ContentFrame.Content = null;
             ContentFrame.Visibility = Visibility.Collapsed;
             TheWebView.Visibility = Visibility.Visible;
             BookmarkButton.Visibility = Visibility.Visible;

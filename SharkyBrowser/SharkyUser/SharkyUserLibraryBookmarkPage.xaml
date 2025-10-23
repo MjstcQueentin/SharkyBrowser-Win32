@@ -13,7 +13,7 @@
         <StackPanel Padding="50">
             <InfoBar IsOpen="False" x:Name="IsEmptyInfoBar" Severity="Informational" Title="There is no item in your bookmarks." IsClosable="False" />
 
-            <ItemsView Padding="50" x:Name="BookmarkItemsView">
+            <ItemsView x:Name="BookmarkItemsView">
                 <ItemsView.ItemTemplate>
                     <DataTemplate x:DataType="web:SharkyWebResource">
                         <ItemContainer HorizontalAlignment="Stretch">
