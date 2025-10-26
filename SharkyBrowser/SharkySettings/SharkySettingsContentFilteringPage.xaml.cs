@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using SharkyBrowser.SharkyWeb;
+using SharkyBrowser.SharkyFilter;
 
 namespace SharkyBrowser.SharkySettings
 {
@@ -21,37 +21,37 @@ namespace SharkyBrowser.SharkySettings
         private void BlockAdultWebsitesCheckbox_Checked(object sender, RoutedEventArgs e)
         {
             SharkyUserSettings.Instance.BlockAdultWebsites = true;
-            SharkyWebFilter.Initialize();
+            SharkyFilterController.Initialize();
         }
 
         private void BlockAdultWebsitesCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
             SharkyUserSettings.Instance.BlockAdultWebsites = false;
-            SharkyWebFilter.Initialize();
+            SharkyFilterController.Initialize();
         }
 
         private void BlockAnnoyingContentCheckbox_Checked(object sender, RoutedEventArgs e)
         {
             SharkyUserSettings.Instance.BlockAnnoyances = true;
-            SharkyWebFilter.Initialize();
+            SharkyFilterController.Initialize();
         }
 
         private void BlockAnnoyingContentCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
             SharkyUserSettings.Instance.BlockAnnoyances = false;
-            SharkyWebFilter.Initialize();
+            SharkyFilterController.Initialize();
         }
 
         private void BlockAdvertisementsCheckbox_Checked(object sender, RoutedEventArgs e)
         {
             SharkyUserSettings.Instance.BlockAdvertisements = true;
-            SharkyWebFilter.Initialize();
+            SharkyFilterController.Initialize();
         }
 
         private void BlockAdvertisementsCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
             SharkyUserSettings.Instance.BlockAdvertisements = false;
-            SharkyWebFilter.Initialize();
+            SharkyFilterController.Initialize();
         }
     }
 }

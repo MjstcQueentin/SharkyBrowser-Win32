@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Windows.Web.Http;
 
-namespace SharkyBrowser.SharkyFilter
+namespace SharkyBrowser.SharkyFilter.FilterTypes
 {
     /// <summary>
     /// Ce filtre de contenu est basé sur les noms de domaines.
@@ -25,7 +25,7 @@ namespace SharkyBrowser.SharkyFilter
         /// <summary>
         /// Liste noire de domaines.
         /// </summary>
-        protected List<String> Blacklist;
+        protected List<string> Blacklist;
 
         public SharkyDomainFilter(string blacklistLocalPath, string blacklistRemotePath)
         {
@@ -38,8 +38,8 @@ namespace SharkyBrowser.SharkyFilter
             {
                 try
                 {
-                    string domains = File.ReadAllText(blacklistLocalPath);
-                    Blacklist = [.. domains.Split(",")];
+                    var domains = File.ReadLines(blacklistLocalPath);
+                    Blacklist = [.. domains];
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +61,7 @@ namespace SharkyBrowser.SharkyFilter
                 HttpResponseMessage msg = await client.GetAsync(new Uri(BlacklistRemotePath));
                 string domains = await msg.Content.ReadAsStringAsync();
 
-                Blacklist = [.. domains.Split(",")];
+                Blacklist = [.. domains.ReplaceLineEndings().Split(Environment.NewLine)];
 
                 // Retirer les chaînes vides
                 Blacklist = [.. Blacklist.Where(d => !string.IsNullOrEmpty(d))];
@@ -69,7 +69,7 @@ namespace SharkyBrowser.SharkyFilter
                 // Enregistrer la liste noire dans le chemin local
                 if (!string.IsNullOrEmpty(BlacklistLocalPath))
                 {
-                    File.WriteAllText(BlacklistLocalPath, string.Join(",", Blacklist));
+                    File.WriteAllText(BlacklistLocalPath, string.Join("\n", Blacklist));
                 }
             }
             catch (Exception ex)

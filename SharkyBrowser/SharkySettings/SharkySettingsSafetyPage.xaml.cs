@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using SharkyBrowser.SharkyWeb;
+using SharkyBrowser.SharkyFilter;
 
 namespace SharkyBrowser.SharkySettings
 {
@@ -15,7 +15,7 @@ namespace SharkyBrowser.SharkySettings
 
         private void SharkySettingsSafetyPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            SharkyWebFilter.Initialize();
+            SharkyFilterController.Initialize();
         }
 
         private void BlockMalwareCheckbox_Checked(object sender, RoutedEventArgs e)

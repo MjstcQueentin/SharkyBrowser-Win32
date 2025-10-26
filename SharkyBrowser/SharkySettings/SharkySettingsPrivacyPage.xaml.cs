@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using SharkyBrowser.SharkyFilter;
 using SharkyBrowser.SharkyUser;
 using SharkyBrowser.SharkyWeb;
 using System;
@@ -33,7 +34,7 @@ namespace SharkyBrowser.SharkySettings
         private void SharkySettingsPrivacyPage_Unloaded(object sender, RoutedEventArgs e)
         {
             SharkyUserSettings.Instance.WriteToFile();
-            SharkyWebFilter.Initialize();
+            SharkyFilterController.Initialize();
         }
 
         private void CookiePolicyRadioButtons_SelectionChanged(object sender, RoutedEventArgs e)

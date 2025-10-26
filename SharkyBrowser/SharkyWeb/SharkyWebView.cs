@@ -1,5 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
+using SharkyBrowser.SharkyFilter;
+using SharkyBrowser.SharkyFilter.FilterCategories;
 using SharkyBrowser.SharkySettings;
 using SharkyBrowser.SharkyUser;
 
@@ -25,7 +27,7 @@ namespace SharkyBrowser.SharkyWeb
             };
 
             // Annuler la navigation si l'URI correspond à un filtre de contenu
-            if (SharkyWebFilter.TestUri(new System.Uri(args.Uri)))
+            if (SharkyFilterController.TestUri(new(args.Uri), SharkyFilteringContext.Navigating))
             {
                 args.Cancel = true;
                 return;
@@ -68,7 +70,7 @@ namespace SharkyBrowser.SharkyWeb
         private void CoreWebView2_WebResourceRequested(Microsoft.Web.WebView2.Core.CoreWebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2WebResourceRequestedEventArgs args)
         {
             // Si l'URI correspond à un filtre de contenu, annuler la requête en falsifiant la réponse
-            if (SharkyWebFilter.TestUri(new System.Uri(args.Request.Uri)))
+            if (SharkyFilterController.TestUri(new(args.Request.Uri), SharkyFilteringContext.FetchingResource))
             {
                 args.Response = CoreWebView2.Environment.CreateWebResourceResponse(null, 400, "Request canceled", null);
             }
