@@ -1,6 +1,8 @@
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using SharkyBrowser.SharkyWeb;
+using System;
 using System.Collections.Generic;
 
 namespace SharkyBrowser.SharkyUser
@@ -23,13 +25,17 @@ namespace SharkyBrowser.SharkyUser
 
         private void ElementGrid_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
+            Uri uri = (Uri)((FrameworkElement)sender).Tag;
+            SharkyWindowManager.GetLastFocusedWindow()?.AddTab(uri.ToString());
         }
 
-        private void OpenInNewTabFlyoutItem_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        private void OpenInNewTabFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
+            Uri uri = (Uri)((FrameworkElement)sender).Tag;
+            SharkyWindowManager.GetLastFocusedWindow()?.AddTab(uri.ToString());
         }
 
-        private void DeleteFlyoutItem_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        private void DeleteFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
             string itemId = ((MenuFlyoutItem)sender).Tag.ToString();
 

@@ -1,8 +1,6 @@
-using ABI.System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using SharkyBrowser.SharkySettings;
-using SharkyBrowser.SharkyWeb;
 using System;
 using System.Collections.Generic;
 
@@ -23,6 +21,10 @@ namespace SharkyBrowser
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(CustomDragRegion);
             SizeChanged += MainWindow_SizeChanged;
+            TabControl.GettingFocus += (sender, args) =>
+            {
+                SharkyWindowManager.SetLastFocusedWindow(this);
+            };
 
             AddTab();
         }
