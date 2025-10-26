@@ -9,6 +9,7 @@ namespace SharkyBrowser.SharkyFilter.FilterCategories
     /// </summary>
     internal class SharkyFilterCategoryBase
     {
+        public string ShortName = "UNTITLED";
         public string Name = "Untitled Filter Category";
 
         private readonly List<SharkyDomainFilter> DomainFilters;

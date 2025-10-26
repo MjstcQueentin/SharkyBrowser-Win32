@@ -1,5 +1,7 @@
 using Microsoft.UI.Xaml.Controls;
+using SharkyBrowser.SharkyFilter;
 using SharkyBrowser.SharkyWeb;
+using System.Collections.Generic;
 
 namespace SharkyBrowser
 {
@@ -7,9 +9,13 @@ namespace SharkyBrowser
     {
         private VisibleSecurityState currentVisibleSecurityState;
 
+        private int FilteredResourcesCount = 0;
+        private readonly List<SharkyFilteredResource> FilteredResources = [];
+
         public SharkySecurityUI()
         {
             InitializeComponent();
+            FilteredResourcesListView.ItemsSource = FilteredResources;
         }
 
         public string DomainName
@@ -68,6 +74,22 @@ namespace SharkyBrowser
                     CertificateTextBlock.Text = "";
                 }
             }
+        }
+
+        public void ResetFilteredResourcesCount()
+        {
+            FilteredResourcesCount = 0;
+            FilteredResources.Clear();
+            FilterStateBadge.IconSource = new SymbolIconSource() { Symbol = Symbol.Accept };
+            FilterStateHeaderTextBlock.Text = $"No request has been blocked yet.";
+        }
+
+        public void PushFilteredResource(SharkyFilteredResource resource)
+        {
+            FilteredResourcesCount++;
+            FilteredResources.Add(resource);
+            FilterStateBadge.IconSource = new SymbolIconSource() { Symbol = Symbol.Important };
+            FilterStateHeaderTextBlock.Text = $"Sharky blocked {FilteredResourcesCount} requests.";
         }
     }
 }

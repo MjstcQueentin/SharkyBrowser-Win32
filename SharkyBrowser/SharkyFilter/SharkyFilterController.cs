@@ -46,17 +46,34 @@ namespace SharkyBrowser.SharkyFilter
         /// <param name="uri"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static bool TestUri(Uri uri, SharkyFilteringContext context)
+        public static SharkyFilteredResource TestUri(Uri uri, SharkyFilteringContext context)
         {
             foreach (var category in FilterCategories)
             {
                 if (category.TestUri(uri, context))
                 {
-                    return true;
+                    return new()
+                    {
+                        HasMatched = true,
+                        Uri = uri,
+                        FilterName = category.ShortName
+                    };
                 }
             }
 
-            return false;
+            return new()
+            {
+                HasMatched = false,
+                Uri = uri,
+                FilterName = "N/A"
+            };
         }
+    }
+
+    public class SharkyFilteredResource
+    {
+        public bool HasMatched = false;
+        public Uri Uri = new("http://localhost");
+        public string FilterName = "N/A";
     }
 }

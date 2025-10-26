@@ -12,7 +12,6 @@ using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Networking.BackgroundTransfer;
 using Windows.Storage.Pickers;
 
 namespace SharkyBrowser
@@ -55,7 +54,7 @@ namespace SharkyBrowser
                     UrlBox.Text = uri;
                     if (uri.StartsWith("sharky:"))
                     {
-                        TriggerSpecialPage(uri.Substring(uri.IndexOf(':') + 1));
+                        TriggerSpecialPage(uri[(uri.IndexOf(':') + 1)..]);
                     }
                     else
                     {
@@ -64,18 +63,19 @@ namespace SharkyBrowser
                 }
             };
 
-            TheWebView.NavigationFiltered += (sender, uri) =>
+            TheWebView.NavigationFiltered += (sender, resource) =>
             {
                 MainInfoBar.Severity = InfoBarSeverity.Error;
                 MainInfoBar.Title = "Navigation blocked by content filter";
-                MainInfoBar.Message = string.Concat("The navigation to ", uri, " was blocked by a content filter.");
+                MainInfoBar.Message = string.Concat("The navigation to ", resource.Uri.Host, " was blocked by a content filter.");
                 MainInfoBar.IsOpen = true;
             };
 
-            TheWebView.WebResourceFiltered += (sender, uri) =>
+            TheWebView.WebResourceFiltered += (sender, resource) =>
             {
                 SecurityButtonBadge.Visibility = Visibility.Visible;
                 SecurityButtonBadge.Value += 1;
+                SecurityUI.PushFilteredResource(resource);
             };
 
             TheWebView.CoreWebView2Initialized += TheWebView_CoreWebView2Initialized;
@@ -378,6 +378,7 @@ namespace SharkyBrowser
             SecurityButtonBadge.Visibility = Visibility.Collapsed;
             SecurityButtonBadge.Value = 0;
             SecurityUI.DomainName = new Uri(args.Uri).Host;
+            SecurityUI.ResetFilteredResourcesCount();
 
             // Remove special page if present
             RemoveSpecialPage();

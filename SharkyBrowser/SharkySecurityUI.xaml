@@ -4,13 +4,21 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SharkyBrowser"
+    xmlns:filter="using:SharkyBrowser.SharkyFilter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Width="400" Spacing="12" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <TextBlock x:Name="SecurityUIHeader">Safety and security on domain.com</TextBlock>
-        <Expander HorizontalContentAlignment="Left">
+    <Grid RowSpacing="12">        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Width="400" Grid.Row="0" x:Name="SecurityUIHeader">Safety and security on domain.com</TextBlock>
+
+        <Expander Width="400" Grid.Row="1" HorizontalContentAlignment="Left">
             <Expander.Header>
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <InfoBadge x:Name="ConnectionSecurityStateBadge">
@@ -25,5 +33,35 @@
                 <TextBlock x:Name="CertificateTextBlock"></TextBlock>
             </Expander.Content>
         </Expander>
-    </StackPanel>
+
+        <Expander Width="400" Grid.Row="2" HorizontalContentAlignment="Left">
+            <Expander.Header>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <InfoBadge x:Name="FilterStateBadge">
+                        <InfoBadge.IconSource>
+                            <SymbolIconSource Symbol="Help" />
+                        </InfoBadge.IconSource>
+                    </InfoBadge>
+                    <TextBlock x:Name="FilterStateHeaderTextBlock"></TextBlock>
+                </StackPanel>
+            </Expander.Header>
+            <Expander.Content>
+                <ListView SelectionMode="None" x:Name="FilteredResourcesListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="filter:SharkyFilteredResource">
+                            <Grid ColumnSpacing="24">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock Grid.Column="0" Text="{x:Bind Uri.Host}" />
+                                <TextBlock Grid.Column="1" Text="{x:Bind FilterName}"  />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Expander.Content>
+        </Expander>
+    </Grid>
 </UserControl>
