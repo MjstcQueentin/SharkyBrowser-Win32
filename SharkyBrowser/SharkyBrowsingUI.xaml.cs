@@ -157,6 +157,12 @@ namespace SharkyBrowser
         {
             try
             {
+                if(sender.Text.StartsWith("sharky:"))
+                {
+                    TriggerSpecialPage(sender.Text.Substring(sender.Text.IndexOf(':') + 1));
+                    return;
+                }
+
                 if (args.ChosenSuggestion != null)
                 {
                     SharkyWebResource selected = (SharkyWebResource)(args.ChosenSuggestion);
@@ -371,30 +377,20 @@ namespace SharkyBrowser
             // Update security UI
             SecurityButtonBadge.Visibility = Visibility.Collapsed;
             SecurityButtonBadge.Value = 0;
+            SecurityUI.DomainName = new Uri(args.Uri).Host;
 
-            if (args.Uri.ToString().Contains("sharky:"))
-            {
-                TriggerSpecialPage(args.Uri.ToString().Substring(args.Uri.ToString().IndexOf(":") + 1));
-                SecurityUI.DomainName = "localhost";
-                args.Cancel = true;
-            }
-            else
-            {
-                SecurityUI.DomainName = new Uri(args.Uri).Host;
+            // Remove special page if present
+            RemoveSpecialPage();
 
-                // Remove special page if present
-                RemoveSpecialPage();
+            // Update UI
+            UrlBox.Text = args.Uri.ToString();
+            ParentTab.Header = args.Uri.ToString();
+            RefreshButton.IsEnabled = false;
+            TheProgressBar.Visibility = Visibility.Visible;
 
-                // Update UI
-                UrlBox.Text = args.Uri.ToString();
-                ParentTab.Header = args.Uri.ToString();
-                RefreshButton.IsEnabled = false;
-                TheProgressBar.Visibility = Visibility.Visible;
-
-                // Bookmark state
-                SharkyWebResource bookmark = SharkyUserDatabase.Instance.GetResourceByURI("bookmark", args.Uri.ToString());
-                BookmarkButtonIcon.Glyph = (bookmark == null) ? "\uE734" : "\uE735";
-            }
+            // Bookmark state
+            SharkyWebResource bookmark = SharkyUserDatabase.Instance.GetResourceByURI("bookmark", args.Uri.ToString());
+            BookmarkButtonIcon.Glyph = (bookmark == null) ? "\uE734" : "\uE735";
         }
 
         private void TheWebView_NavigationCompleted(WebView2 sender, CoreWebView2NavigationCompletedEventArgs args)
@@ -407,6 +403,18 @@ namespace SharkyBrowser
 
         private void TriggerSpecialPage(string pageName)
         {
+            SecurityButtonBadge.Visibility = Visibility.Collapsed;
+            SecurityButtonBadge.Value = 0;
+            SecurityUI.DomainName = "localhost";
+            SecurityUI.CurrentVisibleSecurityState = new()
+            {
+                SecurityState = "secure",
+                CertificateSecurityState = new()
+                {
+                    Issuer = "sharky"
+                }
+            };
+
             ContentFrame.Visibility = Visibility.Visible;
             TheWebView.Visibility = Visibility.Collapsed;
             BookmarkButton.Visibility = Visibility.Collapsed;
