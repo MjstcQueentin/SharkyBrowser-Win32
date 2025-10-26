@@ -8,9 +8,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Width="300" Spacing="12">
-        <TextBlock>Security</TextBlock>
-        <InfoBar IsOpen="True" IsIconVisible="True" IsClosable="False" Severity="Informational" Title="" Message="" x:Name="ServerSecurityInfoBar" />
-        <TextBlock x:Name="IssuerTextBlock"></TextBlock>
+    <StackPanel Width="400" Spacing="12" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <TextBlock x:Name="SecurityUIHeader">Safety and security on domain.com</TextBlock>
+        <Expander HorizontalContentAlignment="Left">
+            <Expander.Header>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <InfoBadge x:Name="ConnectionSecurityStateBadge">
+                        <InfoBadge.IconSource>
+                            <SymbolIconSource Symbol="Help" />
+                        </InfoBadge.IconSource>
+                    </InfoBadge>
+                    <TextBlock x:Name="ConnectionSecurityStateHeaderTextBlock"></TextBlock>
+                </StackPanel>
+            </Expander.Header>
+            <Expander.Content>
+                <TextBlock x:Name="CertificateTextBlock"></TextBlock>
+            </Expander.Content>
+        </Expander>
     </StackPanel>
 </UserControl>

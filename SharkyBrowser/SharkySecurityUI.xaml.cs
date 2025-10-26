@@ -1,4 +1,3 @@
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using SharkyBrowser.SharkyWeb;
 
@@ -13,6 +12,14 @@ namespace SharkyBrowser
             InitializeComponent();
         }
 
+        public string DomainName
+        {
+            set
+            {
+                SecurityUIHeader.Text = $"Safety and security on {value}";
+            }
+        }
+
         public VisibleSecurityState CurrentVisibleSecurityState
         {
             get => currentVisibleSecurityState;
@@ -22,35 +29,31 @@ namespace SharkyBrowser
                 switch (value.SecurityState)
                 {
                     case "unknown":
-                        ServerSecurityInfoBar.Severity = InfoBarSeverity.Informational;
-                        ServerSecurityInfoBar.Message = "The security state of this connection is unknown.";
-                        break;
                     case "neutral":
-                        ServerSecurityInfoBar.Severity = InfoBarSeverity.Informational;
-                        ServerSecurityInfoBar.Message = "The security state of this connection is neutral.";
+                        ConnectionSecurityStateBadge.IconSource = new SymbolIconSource() { Symbol = Symbol.Help };
+                        ConnectionSecurityStateHeaderTextBlock.Text = "No information yet.";
                         break;
                     case "insecure":
                     case "insecure-broken":
-                        ServerSecurityInfoBar.Severity = InfoBarSeverity.Error;
-                        ServerSecurityInfoBar.Message = "This connection is insecure.";
+                        ConnectionSecurityStateBadge.IconSource = new SymbolIconSource() { Symbol = Symbol.Cancel };
+                        ConnectionSecurityStateHeaderTextBlock.Text = "Connection to this website is insecure.";
                         break;
                     case "secure":
-                        ServerSecurityInfoBar.Severity = InfoBarSeverity.Success;
-                        ServerSecurityInfoBar.Message = "This connection is secure.";
+                        ConnectionSecurityStateBadge.IconSource = new SymbolIconSource() { Symbol = Symbol.Accept };
+                        ConnectionSecurityStateHeaderTextBlock.Text = "Connection to this website is secure.";
                         break;
                     case "info":
-                        ServerSecurityInfoBar.Severity = InfoBarSeverity.Warning;
-                        ServerSecurityInfoBar.Message = "This connection has information.";
+                        ConnectionSecurityStateBadge.IconSource = new SymbolIconSource() { Symbol = Symbol.Help };
+                        ConnectionSecurityStateHeaderTextBlock.Text = "More information available.";
                         break;
                 }
 
-                if(value.CertificateSecurityState?.Issuer is not null)
+                if(value.CertificateSecurityState is not null)
                 {
-                    IssuerTextBlock.Visibility = Visibility.Visible;
-                    IssuerTextBlock.Text = $"Issued by: {value.CertificateSecurityState.Issuer}";
-                } else
-                {
-                    IssuerTextBlock.Visibility = Visibility.Collapsed;
+                    CertificateTextBlock.Text = $"Protocol: {value.CertificateSecurityState?.Protocol}";
+                    CertificateTextBlock.Text += $"\nCertificate issued by: {value.CertificateSecurityState?.Issuer ?? "Unknown issuer"}";
+                    CertificateTextBlock.Text += $"\nValid from {SharkyUtils.UnixTimestampToDateTime((long)value.CertificateSecurityState?.ValidFrom)}";
+                    CertificateTextBlock.Text += $"\nValid to {SharkyUtils.UnixTimestampToDateTime((long)value.CertificateSecurityState?.ValidTo)}";
                 }
             }
         }

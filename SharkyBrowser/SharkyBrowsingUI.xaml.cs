@@ -64,6 +64,20 @@ namespace SharkyBrowser
                 }
             };
 
+            TheWebView.NavigationFiltered += (sender, uri) =>
+            {
+                MainInfoBar.Severity = InfoBarSeverity.Error;
+                MainInfoBar.Title = "Navigation blocked by content filter";
+                MainInfoBar.Message = string.Concat("The navigation to ", uri, " was blocked by a content filter.");
+                MainInfoBar.IsOpen = true;
+            };
+
+            TheWebView.WebResourceFiltered += (sender, uri) =>
+            {
+                SecurityButtonBadge.Visibility = Visibility.Visible;
+                SecurityButtonBadge.Value += 1;
+            };
+
             TheWebView.CoreWebView2Initialized += TheWebView_CoreWebView2Initialized;
             DownloadUI.DownloadRetryRequested += DownloadUI_DownloadRetryRequested;
             BookmarkUI.BookmarkSaved += BookmarkUI_BookmarkSaved;
@@ -354,20 +368,33 @@ namespace SharkyBrowser
 
         private void SharkyWebView_NavigationStarting(WebView2 sender, CoreWebView2NavigationStartingEventArgs args)
         {
+            // Update security UI
+            SecurityButtonBadge.Visibility = Visibility.Collapsed;
+            SecurityButtonBadge.Value = 0;
+
             if (args.Uri.ToString().Contains("sharky:"))
             {
                 TriggerSpecialPage(args.Uri.ToString().Substring(args.Uri.ToString().IndexOf(":") + 1));
-                return;
+                SecurityUI.DomainName = "localhost";
+                args.Cancel = true;
             }
+            else
+            {
+                SecurityUI.DomainName = new Uri(args.Uri).Host;
 
-            RemoveSpecialPage();
-            UrlBox.Text = args.Uri.ToString();
-            ParentTab.Header = args.Uri.ToString();
-            RefreshButton.IsEnabled = false;
-            TheProgressBar.Visibility = Visibility.Visible;
+                // Remove special page if present
+                RemoveSpecialPage();
 
-            SharkyWebResource bookmark = SharkyUserDatabase.Instance.GetResourceByURI("bookmark", args.Uri.ToString());
-            BookmarkButtonIcon.Glyph = (bookmark == null) ? "\uE734" : "\uE735";
+                // Update UI
+                UrlBox.Text = args.Uri.ToString();
+                ParentTab.Header = args.Uri.ToString();
+                RefreshButton.IsEnabled = false;
+                TheProgressBar.Visibility = Visibility.Visible;
+
+                // Bookmark state
+                SharkyWebResource bookmark = SharkyUserDatabase.Instance.GetResourceByURI("bookmark", args.Uri.ToString());
+                BookmarkButtonIcon.Glyph = (bookmark == null) ? "\uE734" : "\uE735";
+            }
         }
 
         private void TheWebView_NavigationCompleted(WebView2 sender, CoreWebView2NavigationCompletedEventArgs args)

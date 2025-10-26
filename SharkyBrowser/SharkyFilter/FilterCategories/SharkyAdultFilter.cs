@@ -8,6 +8,7 @@ namespace SharkyBrowser.SharkyFilter.FilterCategories
     {
         public SharkyAdultFilter()
         {
+            Name = "Adult Content Filter";
             AddDomainFilter(new FilterTypes.SharkyDomainFilter("", "http://sharky.lesmajesticiels.org/lists/domains/adult.txt"));
 
             // Enable aggressive mode to block navigation to adult sites as well

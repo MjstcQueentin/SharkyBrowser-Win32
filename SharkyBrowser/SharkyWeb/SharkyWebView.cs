@@ -4,12 +4,16 @@ using SharkyBrowser.SharkyFilter;
 using SharkyBrowser.SharkyFilter.FilterCategories;
 using SharkyBrowser.SharkySettings;
 using SharkyBrowser.SharkyUser;
+using System;
 
 namespace SharkyBrowser.SharkyWeb
 {
     public class SharkyWebView : WebView2
     {
         SharkyWebResource CurrentPage;
+
+        public event EventHandler<string> NavigationFiltered;
+        public event EventHandler<string> WebResourceFiltered;
 
         public SharkyWebView()
         {
@@ -23,12 +27,13 @@ namespace SharkyBrowser.SharkyWeb
             CurrentPage = new()
             {
                 Name = args.Uri,
-                Uri = new System.Uri(args.Uri)
+                Uri = new(args.Uri)
             };
 
             // Annuler la navigation si l'URI correspond à un filtre de contenu
             if (SharkyFilterController.TestUri(new(args.Uri), SharkyFilteringContext.Navigating))
             {
+                NavigationFiltered?.Invoke(this, args.Uri);
                 args.Cancel = true;
                 return;
             }
@@ -70,9 +75,10 @@ namespace SharkyBrowser.SharkyWeb
         private void CoreWebView2_WebResourceRequested(Microsoft.Web.WebView2.Core.CoreWebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2WebResourceRequestedEventArgs args)
         {
             // Si l'URI correspond à un filtre de contenu, annuler la requête en falsifiant la réponse
-            if (SharkyFilterController.TestUri(new(args.Request.Uri), SharkyFilteringContext.FetchingResource))
+            if (args.ResourceContext != Microsoft.Web.WebView2.Core.CoreWebView2WebResourceContext.Document && SharkyFilterController.TestUri(new(args.Request.Uri), SharkyFilteringContext.FetchingResource))
             {
                 args.Response = CoreWebView2.Environment.CreateWebResourceResponse(null, 400, "Request canceled", null);
+                WebResourceFiltered?.Invoke(this, args.Request.Uri);
             }
             else
             {
