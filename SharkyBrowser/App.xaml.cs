@@ -5,6 +5,8 @@ using SharkyBrowser.SharkySettings;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace SharkyBrowser
 {
@@ -29,11 +31,39 @@ namespace SharkyBrowser
         /// Invoked when the application is launched.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            // Initialize user data space
             Directory.CreateDirectory(string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "\\Sharky\\"));
             SQLitePCL.Batteries.Init();
+
+            // Open a new window
             OpenNewWindow();
+
+            // Handle shares
+            // Check if this app was launched as a Share Target:
+            var activationArguments = Windows.ApplicationModel.AppInstance.GetActivatedEventArgs();
+            if (activationArguments.Kind == ActivationKind.ShareTarget)
+            {
+                ShareTargetActivatedEventArgs shareArgs = activationArguments as ShareTargetActivatedEventArgs;
+
+                // Get the shared data from the ShareOperation:
+                shareArgs.ShareOperation.ReportStarted();
+                if (shareArgs.ShareOperation.Data.Contains(StandardDataFormats.Uri))
+                {
+                    Uri uriToLaunch = await shareArgs.ShareOperation.Data.GetUriAsync();
+                    SharkyWindowManager.GetLastFocusedWindow().AddTab(uriToLaunch.ToString());
+                }
+
+                if(shareArgs.ShareOperation.Data.Contains(StandardDataFormats.WebLink))
+                {
+                    Uri webLinkToLaunch = await shareArgs.ShareOperation.Data.GetWebLinkAsync();
+                    SharkyWindowManager.GetLastFocusedWindow().AddTab(webLinkToLaunch.ToString());
+                }
+
+                // Once we have received the shared data from the ShareOperation, call ReportCompleted()
+                shareArgs.ShareOperation.ReportCompleted();
+            }
         }
 
         private readonly List<MainWindow> m_windows;
@@ -48,6 +78,7 @@ namespace SharkyBrowser
             m_window.Activate();
 
             m_windows.Add(m_window);
+            SharkyWindowManager.SetLastFocusedWindow(m_window);
         }
 
         public void OnMainWindowClosed(object sender, WindowEventArgs e) {
