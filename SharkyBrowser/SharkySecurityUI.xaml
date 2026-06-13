@@ -16,7 +16,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock Width="400" Grid.Row="0" x:Name="SecurityUIHeader">Safety and security on domain.com</TextBlock>
+        <TextBlock Width="400" Grid.Row="0" x:Name="SecurityUIHeader">Safety and security</TextBlock>
 
         <Expander Width="400" Grid.Row="1" HorizontalContentAlignment="Left">
             <Expander.Header>
