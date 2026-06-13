@@ -2,7 +2,7 @@
 
 # Sharky Browser
 
-This is a work in progress.
+[![Casual Maintenance Intended](https://casuallymaintained.tech/badge.svg)](https://casuallymaintained.tech/)
 
 Sharky Browser, proviously known as SmartNet Browser, is a lightweight browser based on Edge WebView2. The goal of this project is to provide a browser that only packs the essential, without sacrificing performance and safety. Planned features include an built-in ad-blocker, tracking prevention, data synchronization with MajestiCloud.
 
