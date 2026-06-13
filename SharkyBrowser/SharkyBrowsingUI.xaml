@@ -36,19 +36,19 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" x:Name="BackButton" Click="BackButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"  Height="32" ToolTipService.ToolTip="Back">
+            <Button Grid.Column="0" x:Name="BackButton" x:Uid="Back" Click="BackButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"  Height="32">
                 <FontIcon FontSize="16" Glyph="&#xF0D3;"></FontIcon>
             </Button>
-            <Button Grid.Column="1" x:Name="ForwardButton" Click="ForwardButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32" ToolTipService.ToolTip="Forward">
+            <Button Grid.Column="1" x:Name="ForwardButton" x:Uid="Forward" Click="ForwardButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xF0D2;"></FontIcon>
             </Button>
-            <Button Grid.Column="2" x:Name="HomeButton" Click="HomeButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"  Height="32" ToolTipService.ToolTip="Home">
+            <Button Grid.Column="2" x:Name="HomeButton" x:Uid="Home" Click="HomeButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"  Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE80F;"></FontIcon>
             </Button>
-            <Button Grid.Column="3" x:Name="RefreshButton" Click="RefreshButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32" ToolTipService.ToolTip="Refresh">
+            <Button Grid.Column="3" x:Name="RefreshButton" x:Uid="Refresh" Click="RefreshButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE72C;"></FontIcon>
             </Button>
-            <Button Grid.Column="4" x:Name="SecurityButton" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32" ToolTipService.ToolTip="Security">
+            <Button Grid.Column="4" x:Name="SecurityButton" x:Uid="Security" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto">
                     <FontIcon FontSize="16" Glyph="&#xEA18;"></FontIcon>
                     <InfoBadge HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-10" x:Name="SecurityButtonBadge"></InfoBadge>
@@ -83,7 +83,7 @@
                     </DataTemplate>
                 </AutoSuggestBox.ItemTemplate>
             </AutoSuggestBox>
-            <Button Grid.Column="6" x:Name="FileDownloadButton" Visibility="Collapsed" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="FlyoutButton_Click" Height="32" ToolTipService.ToolTip="Download queue">
+            <Button Grid.Column="6" x:Name="FileDownloadButton" x:Uid="FileDownload" Visibility="Collapsed" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="FlyoutButton_Click" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE896;"></FontIcon>
                 <FlyoutBase.AttachedFlyout>
                     <Flyout>
@@ -91,7 +91,7 @@
                     </Flyout>
                 </FlyoutBase.AttachedFlyout>
             </Button>
-            <Button Grid.Column="7" x:Name="BookmarkButton" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="BookmarkButton_Click" Height="32" ToolTipService.ToolTip="Bookmark">
+            <Button Grid.Column="7" x:Name="BookmarkButton" x:Uid="Bookmark" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="BookmarkButton_Click" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE734;" x:Name="BookmarkButtonIcon"></FontIcon>
                 <Button.Flyout>
                     <Flyout>
@@ -99,15 +99,15 @@
                     </Flyout>
                 </Button.Flyout>
             </Button>
-            <Button Grid.Column="8" x:Name="AccountButton" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="FlyoutButton_Click" Height="32" ToolTipService.ToolTip="Account">
+            <Button Grid.Column="8" x:Name="AccountButton" x:Uid="Account" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="FlyoutButton_Click" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE77B;"></FontIcon>
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout Placement="BottomEdgeAlignedRight">
-                        <MenuFlyoutItem Text="Log into MajestiCloud" Icon="Forward"/>
+                        <MenuFlyoutItem x:Uid="LogIntoMajestiCloud" Icon="Forward"/>
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
             </Button>
-            <Button Grid.Column="9" x:Name="MenuButton" Click="FlyoutButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32" ToolTipService.ToolTip="Menu">
+            <Button Grid.Column="9" x:Name="MenuButton" x:Uid="Menu" Click="FlyoutButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE700;"></FontIcon>
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout Placement="BottomEdgeAlignedRight">
@@ -191,8 +191,8 @@
                             <MenuFlyoutSubItem.Icon>
                                 <SymbolIcon Symbol="Help"></SymbolIcon>
                             </MenuFlyoutSubItem.Icon>
-                            <MenuFlyoutItem Text="Get support" x:Name="GetSupportMenuFlyoutItem" Click="GetSupportMenuFlyoutItem_Click"/>
-                            <MenuFlyoutItem Text="About Sharky" x:Name="AboutSharkyMenuFlyoutItem" Click="AboutSharkyMenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem x:Uid="GetSupport" x:Name="GetSupportMenuFlyoutItem" Click="GetSupportMenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem x:Uid="AboutSharky" x:Name="AboutSharkyMenuFlyoutItem" Click="AboutSharkyMenuFlyoutItem_Click"/>
                         </MenuFlyoutSubItem>
                         <MenuFlyoutSeparator/>
                         <MenuFlyoutItem x:Uid="CloseSharky" x:Name="CloseSharkyMenuFlyoutItem" Click="CloseSharkyMenuFlyoutItem_Click">
