@@ -117,34 +117,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Help.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Help</value>
+  <data name="AboutSharky.Text" xml:space="preserve">
+    <value>À propos de Sharky</value>
   </data>
-  <data name="PageTitle.Header" xml:space="preserve">
-    <value>Page title</value>
+  <data name="Account.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Compte</value>
   </data>
-  <data name="PageAddress.Header" xml:space="preserve">
-    <value>Page address</value>
+  <data name="UrlBox.PlaceholderText" xml:space="preserve">
+    <value>Saisissez des mots-clés à rechercher ou une adresse web</value>
   </data>
-  <data name="Save.Content" xml:space="preserve">
-    <value>Save</value>
+  <data name="Back.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Retour</value>
   </data>
-  <data name="OpenBookmarks.Content" xml:space="preserve">
-    <value>Open bookmarks</value>
+  <data name="Bookmark.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Marque-page</value>
   </data>
-  <data name="DownloadComplete" xml:space="preserve">
-    <value>Download complete.</value>
+  <data name="Bookmarks.Text" xml:space="preserve">
+    <value>Marque-pages</value>
   </data>
-  <data name="NoDownloadInfoBar.Title" xml:space="preserve">
-    <value>No download has started yet.</value>
+  <data name="CloseSharky.Text" xml:space="preserve">
+    <value>Fermer Sharky</value>
   </data>
-  <data name="UserCanceled" xml:space="preserve">
-    <value>User canceled</value>
+  <data name="FileDownload.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Téléchargements</value>
   </data>
-  <data name="None" xml:space="preserve">
-    <value>None</value>
+  <data name="Forward.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Suivant</value>
   </data>
-  <data name="UserPaused" xml:space="preserve">
-    <value>User paused</value>
+  <data name="GetSupport.Text" xml:space="preserve">
+    <value>Obtenir de l'aide</value>
+  </data>
+  <data name="Help.Text" xml:space="preserve">
+    <value>Aide</value>
+  </data>
+  <data name="History.Text" xml:space="preserve">
+    <value>Historique</value>
+  </data>
+  <data name="Home.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="LogIntoMajestiCloud.Text" xml:space="preserve">
+    <value>Se connecter à MajestiCloud</value>
+  </data>
+  <data name="Menu.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="NewTab.Text" xml:space="preserve">
+    <value>Nouvel onglet</value>
+  </data>
+  <data name="NewWindow.Text" xml:space="preserve">
+    <value>Nouvelle fenêtre</value>
+  </data>
+  <data name="Open.Text" xml:space="preserve">
+    <value>Ouvrir...</value>
+  </data>
+  <data name="Print.Text" xml:space="preserve">
+    <value>Imprimer...</value>
+  </data>
+  <data name="Refresh.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Recharger</value>
+  </data>
+  <data name="SaveAs.Text" xml:space="preserve">
+    <value>Enregistrer sous...</value>
+  </data>
+  <data name="Security.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sécurité</value>
+  </data>
+  <data name="Settings.Text" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="Share.Text" xml:space="preserve">
+    <value>Partager...</value>
+  </data>
+  <data name="ToggleFullscreen.Text" xml:space="preserve">
+    <value>Plein écran</value>
   </data>
 </root>

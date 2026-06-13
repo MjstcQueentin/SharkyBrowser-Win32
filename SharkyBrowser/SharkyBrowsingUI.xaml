@@ -36,19 +36,19 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" x:Name="BackButton" x:Uid="Back" Click="BackButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"  Height="32">
+            <Button Grid.Column="0" x:Name="BackButton" x:Uid="/BrowsingUIResources/Back" Click="BackButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"  Height="32">
                 <FontIcon FontSize="16" Glyph="&#xF0D3;"></FontIcon>
             </Button>
-            <Button Grid.Column="1" x:Name="ForwardButton" x:Uid="Forward" Click="ForwardButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
+            <Button Grid.Column="1" x:Name="ForwardButton" x:Uid="/BrowsingUIResources/Forward" Click="ForwardButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xF0D2;"></FontIcon>
             </Button>
-            <Button Grid.Column="2" x:Name="HomeButton" x:Uid="Home" Click="HomeButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"  Height="32">
+            <Button Grid.Column="2" x:Name="HomeButton" x:Uid="/BrowsingUIResources/Home" Click="HomeButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"  Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE80F;"></FontIcon>
             </Button>
-            <Button Grid.Column="3" x:Name="RefreshButton" x:Uid="Refresh" Click="RefreshButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
+            <Button Grid.Column="3" x:Name="RefreshButton" x:Uid="/BrowsingUIResources/Refresh" Click="RefreshButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE72C;"></FontIcon>
             </Button>
-            <Button Grid.Column="4" x:Name="SecurityButton" x:Uid="Security" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
+            <Button Grid.Column="4" x:Name="SecurityButton" x:Uid="/BrowsingUIResources/Security" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto">
                     <FontIcon FontSize="16" Glyph="&#xEA18;"></FontIcon>
                     <InfoBadge HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-10" x:Name="SecurityButtonBadge"></InfoBadge>
@@ -60,7 +60,7 @@
                 </Button.Flyout>
             </Button>
             <AutoSuggestBox Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="UrlBox" Margin="4 0"
-                PlaceholderText="Type a search query or a web address"
+                x:Uid="/BrowsingUIResources/UrlBox"
                 ProcessKeyboardAccelerators="UrlBox_ProcessKeyboardAccelerators"
                 GotFocus="UrlBox_GotFocus"
                 LostFocus="UrlBox_LostFocus"
@@ -83,7 +83,7 @@
                     </DataTemplate>
                 </AutoSuggestBox.ItemTemplate>
             </AutoSuggestBox>
-            <Button Grid.Column="6" x:Name="FileDownloadButton" x:Uid="FileDownload" Visibility="Collapsed" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="FlyoutButton_Click" Height="32">
+            <Button Grid.Column="6" x:Name="FileDownloadButton" x:Uid="/BrowsingUIResources/FileDownload" Visibility="Collapsed" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="FlyoutButton_Click" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE896;"></FontIcon>
                 <FlyoutBase.AttachedFlyout>
                     <Flyout>
@@ -91,7 +91,7 @@
                     </Flyout>
                 </FlyoutBase.AttachedFlyout>
             </Button>
-            <Button Grid.Column="7" x:Name="BookmarkButton" x:Uid="Bookmark" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="BookmarkButton_Click" Height="32">
+            <Button Grid.Column="7" x:Name="BookmarkButton" x:Uid="/BrowsingUIResources/Bookmark" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="BookmarkButton_Click" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE734;" x:Name="BookmarkButtonIcon"></FontIcon>
                 <Button.Flyout>
                     <Flyout>
@@ -99,19 +99,19 @@
                     </Flyout>
                 </Button.Flyout>
             </Button>
-            <Button Grid.Column="8" x:Name="AccountButton" x:Uid="Account" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="FlyoutButton_Click" Height="32">
+            <Button Grid.Column="8" x:Name="AccountButton" x:Uid="/BrowsingUIResources/Account" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Click="FlyoutButton_Click" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE77B;"></FontIcon>
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout Placement="BottomEdgeAlignedRight">
-                        <MenuFlyoutItem x:Uid="LogIntoMajestiCloud" Icon="Forward"/>
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/LogIntoMajestiCloud" Icon="Forward"/>
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
             </Button>
-            <Button Grid.Column="9" x:Name="MenuButton" x:Uid="Menu" Click="FlyoutButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
+            <Button Grid.Column="9" x:Name="MenuButton" x:Uid="/BrowsingUIResources/Menu" Click="FlyoutButton_Click" Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" Height="32">
                 <FontIcon FontSize="16" Glyph="&#xE700;"></FontIcon>
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout Placement="BottomEdgeAlignedRight">
-                        <MenuFlyoutItem x:Uid="NewTab"  x:Name="NewTabMenuFlyoutItem" Click="NewTabMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/NewTab"  x:Name="NewTabMenuFlyoutItem" Click="NewTabMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="T"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -119,7 +119,7 @@
                                 <FontIcon Glyph="&#xE710;"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutItem x:Uid="NewWindow" x:Name="NewWindowMenuFlyoutItem" Click="NewWindowMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/NewWindow" x:Name="NewWindowMenuFlyoutItem" Click="NewWindowMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="N"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -128,7 +128,7 @@
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem x:Uid="Open" x:Name="OpenMenuFlyoutItem" Click="OpenMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/Open" x:Name="OpenMenuFlyoutItem" Click="OpenMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="O"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -136,7 +136,7 @@
                                 <SymbolIcon Symbol="OpenFile"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutItem x:Uid="SaveAs" x:Name="SaveAsMenuFlyoutItem" Click="SaveAsMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/SaveAs" x:Name="SaveAsMenuFlyoutItem" Click="SaveAsMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="S"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -145,7 +145,7 @@
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem x:Uid="Print" x:Name="PrintMenuFlyoutItem" Click="PrintMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/Print" x:Name="PrintMenuFlyoutItem" Click="PrintMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="P"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -153,7 +153,7 @@
                                 <SymbolIcon Symbol="Print"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutItem x:Uid="Share" x:Name="ShareMenuFlyoutItem" Click="ShareMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/Share" x:Name="ShareMenuFlyoutItem" Click="ShareMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control,Shift" Key="S"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -162,7 +162,7 @@
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem x:Uid="ToggleFullscreen" x:Name="FullscreenMenuFlyoutItem" Click="FullscreenMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/ToggleFullscreen" x:Name="FullscreenMenuFlyoutItem" Click="FullscreenMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Key="F11"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -171,31 +171,31 @@
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem x:Uid="History" x:Name="HistoryMenuFlyoutItem" Click="HistoryMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/History" x:Name="HistoryMenuFlyoutItem" Click="HistoryMenuFlyoutItem_Click">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon Glyph="&#xE81C;" />
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutItem x:Uid="Bookmarks" x:Name="BookmarksMenuFlyoutItem" Click="BookmarksMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/Bookmarks" x:Name="BookmarksMenuFlyoutItem" Click="BookmarksMenuFlyoutItem_Click">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon Glyph="&#xE734;" />
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem x:Uid="Settings" x:Name="SettingsMenuFlyoutItem" Click="SettingsMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/Settings" x:Name="SettingsMenuFlyoutItem" Click="SettingsMenuFlyoutItem_Click">
                             <MenuFlyoutItem.Icon>
                                 <SymbolIcon Symbol="Setting"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
-                        <MenuFlyoutSubItem x:Uid="Help">
+                        <MenuFlyoutSubItem x:Uid="/BrowsingUIResources/Help">
                             <MenuFlyoutSubItem.Icon>
                                 <SymbolIcon Symbol="Help"></SymbolIcon>
                             </MenuFlyoutSubItem.Icon>
-                            <MenuFlyoutItem x:Uid="GetSupport" x:Name="GetSupportMenuFlyoutItem" Click="GetSupportMenuFlyoutItem_Click"/>
-                            <MenuFlyoutItem x:Uid="AboutSharky" x:Name="AboutSharkyMenuFlyoutItem" Click="AboutSharkyMenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem x:Uid="/BrowsingUIResources/GetSupport" x:Name="GetSupportMenuFlyoutItem" Click="GetSupportMenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem x:Uid="/BrowsingUIResources/AboutSharky" x:Name="AboutSharkyMenuFlyoutItem" Click="AboutSharkyMenuFlyoutItem_Click"/>
                         </MenuFlyoutSubItem>
                         <MenuFlyoutSeparator/>
-                        <MenuFlyoutItem x:Uid="CloseSharky" x:Name="CloseSharkyMenuFlyoutItem" Click="CloseSharkyMenuFlyoutItem_Click">
+                        <MenuFlyoutItem x:Uid="/BrowsingUIResources/CloseSharky" x:Name="CloseSharkyMenuFlyoutItem" Click="CloseSharkyMenuFlyoutItem_Click">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="Control" Key="Q"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
