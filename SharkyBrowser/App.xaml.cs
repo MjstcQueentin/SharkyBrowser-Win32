@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.ApplicationModel.Resources;
 using SharkyBrowser.SharkyFilter;
 using SharkyBrowser.SharkySettings;
 using System;
@@ -15,6 +16,9 @@ namespace SharkyBrowser
     /// </summary>
     public partial class App : Application
     {
+
+        private readonly ResourceLoader resourceLoader = new(ResourceLoader.GetDefaultResourceFilePath(), "AppResources");
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -94,10 +98,10 @@ namespace SharkyBrowser
             {
                 ContentDialog confirmationDialog = new()
                 {
-                    Title = "Do you really wish to close Sharky?",
-                    Content = "There are " + m_windows.Count + " windows open.",
-                    PrimaryButtonText = "Yes",
-                    CloseButtonText = "No",
+                    Title = resourceLoader.GetString("CloseGracefullyTitle"),
+                    Content = string.Format(resourceLoader.GetString("CloseGracefullyContent"), m_windows.Count),
+                    PrimaryButtonText = resourceLoader.GetString("Yes"),
+                    CloseButtonText = resourceLoader.GetString("No"),
                     XamlRoot = xamlRoot
                 };
 
