@@ -204,4 +204,19 @@
   <data name="SaveAs.Text" xml:space="preserve">
     <value>Enregistrer sous...</value>
   </data>
+  <data name="DownloadComplete" xml:space="preserve">
+    <value>Téléchargement terminé</value>
+  </data>
+  <data name="NoDownloadInfoBar.Title" xml:space="preserve">
+    <value>Aucun téléchargement n'a débuté.</value>
+  </data>
+  <data name="UserCanceled" xml:space="preserve">
+    <value>Annulé par l'utilisateur</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="UserPaused" xml:space="preserve">
+    <value>Mis en pause par l'utilisateur</value>
+  </data>
 </root>

@@ -12,8 +12,8 @@
         <InfoBar 
             IsOpen="True" 
             Severity="Informational" 
-            Title="No download started" 
             IsClosable="False" 
+            x:Uid="NoDownloadInfoBar"
             x:Name="NoDownloadInfoBar"
         />
     </StackPanel>

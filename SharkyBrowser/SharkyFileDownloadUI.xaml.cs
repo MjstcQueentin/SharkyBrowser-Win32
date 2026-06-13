@@ -2,7 +2,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.Web.WebView2.Core;
-using SharkyBrowser.SharkySettings;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -123,7 +122,9 @@ namespace SharkyBrowser
                     {
                         UseShellExecute = true
                     });
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     Console.WriteLine(ex.Message);
                 }
             }
@@ -165,6 +166,8 @@ namespace SharkyBrowser
 
         private void RefreshAllDownloadItemsUI()
         {
+            var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
+
             for (int i = 0; i < DownloadOperations.Count; i++)
             {
                 Grid downloadItem = (Grid)DownloadUIStackPanel.Children[i + 1];
@@ -176,11 +179,11 @@ namespace SharkyBrowser
 
                 if (DownloadOperations[i].State == CoreWebView2DownloadState.InProgress)
                 {
-                    long progress = (DownloadOperations[i].BytesReceived / DownloadOperations[i].TotalBytesToReceive) * 100;
-                    progressBar.Visibility = Visibility.Visible; 
+                    long progress = (DownloadOperations[i].BytesReceived * 100) / DownloadOperations[i].TotalBytesToReceive;
+                    progressBar.Visibility = Visibility.Visible;
                     progressBar.IsIndeterminate = false;
                     progressBar.Value = progress;
-                    subText.Text = $"{DownloadOperations[i].BytesReceived}/{DownloadOperations[i].TotalBytesToReceive}";
+                    subText.Text = $"{progress} %";
                     actionBtn.Content = new FontIcon()
                     {
                         Glyph = "\uE769",
@@ -189,7 +192,14 @@ namespace SharkyBrowser
                 }
                 else if (DownloadOperations[i].State == CoreWebView2DownloadState.Interrupted)
                 {
-                    subText.Text = $"{DownloadOperations[i].InterruptReason}";
+                    try
+                    {
+                        subText.Text = resourceLoader.GetString($"{DownloadOperations[i].InterruptReason}");
+                    }
+                    catch (Exception)
+                    {
+                        subText.Text = $"{DownloadOperations[i].InterruptReason}";
+                    }
                     progressBar.Visibility = Visibility.Collapsed;
                     actionBtn.Content = new FontIcon()
                     {
@@ -204,11 +214,11 @@ namespace SharkyBrowser
                         {
                             downloadItem.ColumnDefinitions.RemoveAt(3);
                         }
-                    } 
+                    }
                 }
                 else
                 {
-                    subText.Text = "Download completed.";
+                    subText.Text = resourceLoader.GetString("DownloadComplete");
                     progressBar.Visibility = Visibility.Collapsed;
                     actionBtn.Content = new FontIcon()
                     {
@@ -216,7 +226,7 @@ namespace SharkyBrowser
                         FontSize = 16
                     };
                     stopBtn.Visibility = Visibility.Collapsed;
-                    if(downloadItem.ColumnDefinitions.Count >= 4)
+                    if (downloadItem.ColumnDefinitions.Count >= 4)
                     {
                         downloadItem.ColumnDefinitions.RemoveAt(3);
                     }

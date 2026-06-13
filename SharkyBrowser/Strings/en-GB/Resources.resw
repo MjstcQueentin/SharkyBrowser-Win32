@@ -204,4 +204,19 @@
   <data name="SaveAs.Text" xml:space="preserve">
     <value>Save as...</value>
   </data>
+  <data name="DownloadComplete" xml:space="preserve">
+    <value>Download complete.</value>
+  </data>
+  <data name="NoDownloadInfoBar.Title" xml:space="preserve">
+    <value>No download has started yet.</value>
+  </data>
+  <data name="UserCanceled" xml:space="preserve">
+    <value>User canceled</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="UserPaused" xml:space="preserve">
+    <value>User paused</value>
+  </data>
 </root>
