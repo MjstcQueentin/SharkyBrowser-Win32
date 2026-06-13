@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.ApplicationModel.Resources;
 using SharkyBrowser.SharkySettings;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace SharkyBrowser
         public App ParentApp;
         private readonly List<SharkyBrowsingUI> ClosedTabs = [];
         private readonly SharkyUserSettings UserSettings = SharkyUserSettings.Instance;
+        private readonly ResourceLoader resourceLoader = new(ResourceLoader.GetDefaultResourceFilePath(), "MainWindowResources");
 
         public MainWindow()
         {
@@ -59,10 +61,10 @@ namespace SharkyBrowser
                 args.Handled = true;
                 ContentDialog confirmationDialog = new()
                 {
-                    Title = "Do you really wish to close this window?",
-                    Content = "There are " + TabControl.TabItems.Count + " tabs open.",
-                    PrimaryButtonText = "Yes",
-                    CloseButtonText = "No",
+                    Title = resourceLoader.GetString("WindowCloseConfirmDialogTitle"),
+                    Content = string.Format(resourceLoader.GetString("WindowCloseConfirmDialogContent"), TabControl.TabItems.Count),
+                    PrimaryButtonText = resourceLoader.GetString("Yes"),
+                    CloseButtonText = resourceLoader.GetString("No"),
                     XamlRoot = Content.XamlRoot
                 };
 
