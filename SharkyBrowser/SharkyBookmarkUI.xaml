@@ -9,11 +9,11 @@
     mc:Ignorable="d">
 
     <StackPanel Width="300" Spacing="12">
-        <TextBox Header="Page title" x:Name="PageTitleTextBox" />
-        <TextBox Header="Page address" x:Name="PageURITextBox" />
+        <TextBox x:Uid="PageTitle" x:Name="PageTitleTextBox" />
+        <TextBox x:Uid="PageAddress" x:Name="PageURITextBox" />
         <StackPanel Orientation="Horizontal" Spacing="6">
-            <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click" />
-            <Button Content="Open bookmarks" x:Name="OpenBookmarksButton" Click="OpenBookmarksButton_Click" />
+            <Button x:Uid="Save" x:Name="SaveButton" Click="SaveButton_Click" />
+            <Button x:Uid="OpenBookmarks" x:Name="OpenBookmarksButton" Click="OpenBookmarksButton_Click" />
         </StackPanel>
     </StackPanel>
 </UserControl>

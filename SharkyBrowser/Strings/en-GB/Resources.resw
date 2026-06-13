@@ -171,14 +171,14 @@
   <data name="Open.Text" xml:space="preserve">
     <value>Open...</value>
   </data>
+  <data name="PageTitle.Header" xml:space="preserve">
+    <value>Page title</value>
+  </data>
   <data name="Print.Text" xml:space="preserve">
     <value>Print...</value>
   </data>
   <data name="Refresh.ToolTipService.ToolTip" xml:space="preserve">
     <value>Refresh</value>
-  </data>
-  <data name="SaveAs.Text" xml:space="preserve">
-    <value>Save as...</value>
   </data>
   <data name="Security.ToolTipService.ToolTip" xml:space="preserve">
     <value>Security</value>
@@ -191,5 +191,17 @@
   </data>
   <data name="ToggleFullscreen.Text" xml:space="preserve">
     <value>Toggle fullscreen</value>
+  </data>
+  <data name="PageAddress.Header" xml:space="preserve">
+    <value>Page address</value>
+  </data>
+  <data name="Save.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="OpenBookmarks.Content" xml:space="preserve">
+    <value>Open bookmarks</value>
+  </data>
+  <data name="SaveAs.Text" xml:space="preserve">
+    <value>Save as...</value>
   </data>
 </root>
