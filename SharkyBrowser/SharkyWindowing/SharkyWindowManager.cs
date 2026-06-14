@@ -1,5 +1,4 @@
-﻿
-namespace SharkyBrowser
+﻿namespace SharkyBrowser.SharkyWindowing
 {
     class SharkyWindowManager
     {

@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
 using SharkyBrowser.SharkyFilter;
 using SharkyBrowser.SharkySettings;
+using SharkyBrowser.SharkyWindowing;
 using System;
 using System.Collections.Generic;
 using System.IO;

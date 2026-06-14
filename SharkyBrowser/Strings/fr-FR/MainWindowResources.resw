@@ -120,6 +120,9 @@
   <data name="No" xml:space="preserve">
     <value>Non</value>
   </data>
+  <data name="PopLastClosedTabMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Réouvrir le dernier onglet fermé</value>
+  </data>
   <data name="WindowCloseConfirmDialogContent" xml:space="preserve">
     <value>Il y a {0} onglets ouverts.</value>
   </data>

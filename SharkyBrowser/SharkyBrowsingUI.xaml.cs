@@ -31,6 +31,11 @@ namespace SharkyBrowser
             get => (MainWindow)ParentTab.Tag;
         }
 
+        public string CurrentURI
+        {
+            get => TheWebView.Source?.AbsoluteUri;
+        }
+
         private bool IsWebViewInitialized = false;
 
         public SharkyBrowsingUI(string uri)
@@ -457,11 +462,6 @@ namespace SharkyBrowser
         }
 
         public void Dispose()
-        {
-            if (TheWebView.CoreWebView2 is not null) TheWebView.NavigateToString("");
-        }
-
-        public void SaveForLater()
         {
             if (TheWebView.CoreWebView2 is not null) TheWebView.NavigateToString("");
         }

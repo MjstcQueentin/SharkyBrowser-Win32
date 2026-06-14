@@ -2,15 +2,15 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
 using SharkyBrowser.SharkySettings;
+using SharkyBrowser.SharkyWindowing;
 using System;
-using System.Collections.Generic;
 
 namespace SharkyBrowser
 {
     public sealed partial class MainWindow : Window
     {
         public App ParentApp;
-        private readonly List<SharkyBrowsingUI> ClosedTabs = [];
+        private readonly SharkyTabManager TabManager = new();
         private readonly SharkyUserSettings UserSettings = SharkyUserSettings.Instance;
         private readonly ResourceLoader resourceLoader = new(ResourceLoader.GetDefaultResourceFilePath(), "MainWindowResources");
 
@@ -81,7 +81,8 @@ namespace SharkyBrowser
         {
             uri ??= UserSettings.Homepage;
             SharkyBrowsingUI newBrowser = new(uri);
-            newBrowser.NewTabRequested += (sender, args) => {
+            newBrowser.NewTabRequested += (sender, args) =>
+            {
                 AddTab(args.Uri, args.IsUserInitiated);
                 args.Handled = true;
             };
@@ -97,28 +98,7 @@ namespace SharkyBrowser
 
             newBrowser.Tag = newTab;
             TabControl.TabItems.Add(newTab);
-            if(selectNewTab) TabControl.SelectedIndex = TabControl.TabItems.Count - 1;
-        }
-
-        private void RestoreTab()
-        {
-            if(ClosedTabs.Count > 0)
-            {
-                SharkyBrowsingUI lastBrowser = ClosedTabs[^1];
-                TabViewItem newTab = new()
-                {
-                    IconSource = new SymbolIconSource() { Symbol = Symbol.Globe },
-                    Header = "New tab",
-                    Content = lastBrowser,
-                    Tag = this
-                };
-
-                lastBrowser.Tag = newTab;
-                TabControl.TabItems.Add(newTab);
-                lastBrowser.Restore();
-                ClosedTabs.RemoveAt(ClosedTabs.Count - 1);
-                TabControl.SelectedIndex = TabControl.TabItems.Count - 1;
-            }
+            if (selectNewTab) TabControl.SelectedIndex = TabControl.TabItems.Count - 1;
         }
 
         private void TabView_AddTabButtonClick(TabView sender, object args)
@@ -127,13 +107,28 @@ namespace SharkyBrowser
         }
 
         private void TabControl_TabCloseRequested(TabView sender, TabViewTabCloseRequestedEventArgs args)
-        { 
+        {
             SharkyBrowsingUI theUi = (SharkyBrowsingUI)args.Tab.Content;
-            theUi.SaveForLater();
-            ClosedTabs.Add(theUi);
+            TabManager.AddClosedTab(theUi.CurrentURI);
+            PopLastClosedTabMenuFlyoutItem.IsEnabled = true;
 
             sender.TabItems.Remove(args.Item);
             if (sender.TabItems.Count == 0) Close();
+        }
+
+        private void PopLastClosedTabMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+            string url = TabManager.PopClosedTab();
+
+            if (!string.IsNullOrEmpty(url))
+            {
+                AddTab(url);
+
+                if (TabManager.IsEmpty)
+                {
+                    PopLastClosedTabMenuFlyoutItem.IsEnabled = false;
+                }
+            }
         }
     }
 }

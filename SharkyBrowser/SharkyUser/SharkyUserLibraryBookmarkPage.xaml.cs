@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using SharkyBrowser.SharkyWeb;
+using SharkyBrowser.SharkyWindowing;
 using System;
 using System.Collections.Generic;
 

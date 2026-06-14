@@ -120,6 +120,9 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="PopLastClosedTabMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Reopen the last closed tab</value>
+  </data>
   <data name="WindowCloseConfirmDialogContent" xml:space="preserve">
     <value>There are {0} open tabs.</value>
   </data>
