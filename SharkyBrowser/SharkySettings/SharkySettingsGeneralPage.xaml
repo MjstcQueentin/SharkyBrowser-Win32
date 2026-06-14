@@ -30,10 +30,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="Home"/>
-                    <TextBlock Grid.Column="1" Grid.Row="0">Homepage</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
-                        Define which webpage to open when Sharky starts
-                    </TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0" x:Uid="/SettingsResources/GeneralPageHomepageBlockTitle"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}" x:Uid="/SettingsResources/GeneralPageHomepageBlockCaption"></TextBlock>
                 </Grid>
             </Expander.Header>
             <Expander.Content>
@@ -46,7 +44,7 @@
                     <StackPanel Padding="0 6" Orientation="Horizontal">
                         <StackPanel.Spacing>6</StackPanel.Spacing>
                         <HyperlinkButton Tag="https://start.lesmajesticiels.org/" Click="HomepageSuggestionButton_Click">Majestic Start</HyperlinkButton>
-                        <HyperlinkButton Tag="about:blank" Click="HomepageSuggestionButton_Click">Blank page</HyperlinkButton>
+                        <HyperlinkButton x:Uid="/SettingsResources/GeneralPageHomepageBlankPageButton" Tag="about:blank" Click="HomepageSuggestionButton_Click"></HyperlinkButton>
                     </StackPanel>
                 </StackPanel>
             </Expander.Content>
@@ -70,10 +68,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <FontIcon Grid.Column="0" Grid.RowSpan="2" Glyph="&#xe721;"/>
-                    <TextBlock Grid.Column="1" Grid.Row="0">Search providers</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
-                        Manage the search engines registered into your Sharky
-                    </TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0" x:Uid="/SettingsResources/GeneralPageSearchBlockTitle"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}" x:Uid="/SettingsResources/GeneralPageSearchBlockCaption"></TextBlock>
                 </Grid>
             </Expander.Header>
             <Expander.Content>
@@ -115,10 +111,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="Download"/>
-                    <TextBlock Grid.Column="1" Grid.Row="0">Download location</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
-                        The default folder to store your downloaded files
-                    </TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0" x:Uid="/SettingsResources/GeneralPageDownloadLocationBlockTitle"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Uid="/SettingsResources/GeneralPageDownloadLocationBlockCaption" Style="{StaticResource CaptionTextBlockStyle}"></TextBlock>
                 </Grid>
             </Expander.Header>
             <Expander.Content>
@@ -144,15 +138,13 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <SymbolIcon Grid.Column="0" Grid.RowSpan="2" Symbol="More"/>
-                    <TextBlock Grid.Column="1" Grid.Row="0">Browser behaviour</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource CaptionTextBlockStyle}">
-                        Miscellaneous settings to customize Sharky's behaviour
-                    </TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0" x:Uid="/SettingsResources/GeneralPageBrowserBehaviourBlockTitle"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Uid="/SettingsResources/GeneralPageBrowserBehaviourBlockCaption" Style="{StaticResource CaptionTextBlockStyle}"></TextBlock>
                 </Grid>
             </Expander.Header>
             <Expander.Content>
                 <StackPanel>
-                    <CheckBox Content="Warn me when I am about to close multiple tabs or windows at once" 
+                    <CheckBox x:Uid="/SettingsResources/GeneralPageBrowserBehaviourCloseWarningCheckbox"
                               x:Name="CloseWarningCheckBox" 
                               Checked="CloseWarningCheckBox_Checked" 
                               Unchecked="CloseWarningCheckBox_Unchecked"/>

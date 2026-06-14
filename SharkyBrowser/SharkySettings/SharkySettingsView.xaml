@@ -9,23 +9,23 @@
     mc:Ignorable="d"
     Background="Transparent">
 
-    <NavigationView x:Name="SettingsNavigationView" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" PaneTitle="Sharky Settings"
+    <NavigationView x:Name="SettingsNavigationView" x:Uid="/SettingsResources/SettingsNavigationView" IsBackButtonVisible="Collapsed" IsSettingsVisible="False"
         CompactModeThresholdWidth="0"
         ExpandedModeThresholdWidth="1024"
         Loaded="NavigationView_Loaded"
         ItemInvoked="NavigationView_ItemInvoked"
         SelectionChanged="NavigationView_SelectionChanged">
         <NavigationView.MenuItems>
-            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsGeneralPage" Icon="Setting" Content="General"/>
-            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsPrivacyPage" Icon="View" Content="Privacy"/>
-            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsSafetyPage" Icon="Permissions" Content="Safety"/>
-            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsContentFilteringPage" Icon="Filter" Content="Content filters"/>
-            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsUpdatesPage" Icon="Sync" Content="Updates"/>
-            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsLocalizationPage" Icon="World" Content="Localization"/>
-            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsTroubleshootingPage" Icon="Repair" Content="Troubleshooting"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsGeneralPage" x:Uid="/SettingsResources/SettingsGeneralNavigationViewItem" Icon="Setting"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsPrivacyPage" x:Uid="/SettingsResources/SettingsPrivacyNavigationViewItem" Icon="View"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsSafetyPage" x:Uid="/SettingsResources/SettingsSafetyNavigationViewItem" Icon="Permissions"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsContentFilteringPage" x:Uid="/SettingsResources/SettingsContentFilteringNavigationViewItem" Icon="Filter"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsUpdatesPage" x:Uid="/SettingsResources/SettingsUpdatesNavigationViewItem" Icon="Sync"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsLocalizationPage" x:Uid="/SettingsResources/SettingsLocalizationNavigationViewItem" Icon="World"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsTroubleshootingPage" x:Uid="/SettingsResources/SettingsTroubleshootNavigationViewItem" Icon="Repair"/>
         </NavigationView.MenuItems>
         <NavigationView.FooterMenuItems>
-            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsAccountPage" Icon="Contact" Content="Account"/>
+            <NavigationViewItem Tag="SharkyBrowser.SharkySettings.SharkySettingsAccountPage" x:Uid="/SettingsResources/SettingsAccountNavigationViewItem" Icon="Contact"/>
         </NavigationView.FooterMenuItems>
 
         <ScrollViewer>
