@@ -9,14 +9,14 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <NavigationView x:Name="LibraryNavView" IsSettingsVisible="False" IsBackButtonVisible="Collapsed" PaneTitle="Sharky Library" SelectionChanged="LibraryNavView_SelectionChanged">
+    <NavigationView x:Name="LibraryNavView" x:Uid="/UserLibraryResources/LibraryNavView" IsSettingsVisible="False" IsBackButtonVisible="Collapsed" SelectionChanged="LibraryNavView_SelectionChanged">
         <NavigationView.MenuItems>
-            <NavigationViewItem Content="History" Tag="SharkyUserHistoryPage" x:Name="HistoryNavigationViewItem">
+            <NavigationViewItem Tag="SharkyUserHistoryPage" x:Name="HistoryNavigationViewItem" x:Uid="/UserLibraryResources/HistoryNavigationViewItem">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE81C;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem Content="Bookmarks" Tag="SharkyUserBookmarkPage" x:Name="BookmarkNavigationViewItem">
+            <NavigationViewItem Tag="SharkyUserBookmarkPage" x:Name="BookmarkNavigationViewItem" x:Uid="/UserLibraryResources/BookmarkNavigationViewItem">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE734;" />
                 </NavigationViewItem.Icon>

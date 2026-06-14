@@ -11,7 +11,7 @@
 
     <ScrollView>
         <StackPanel Padding="50">
-            <InfoBar IsOpen="False" x:Name="IsEmptyInfoBar" Severity="Informational" Title="There is no item in your browsing history." IsClosable="False" />
+            <InfoBar IsOpen="False" x:Name="IsEmptyInfoBar" x:Uid="/UserLibraryResources/HistoryIsEmptyInfoBar" Severity="Informational" IsClosable="False" />
 
             <ItemsView x:Name="HistoryItemsView">
                 <ItemsView.ItemTemplate>
@@ -26,8 +26,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Grid.ContextFlyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem Text="Open in a new tab" x:Name="OpenInNewTabFlyoutItem" Tag="{x:Bind Uri}" Click="OpenInNewTabFlyoutItem_Click"/>
-                                        <MenuFlyoutItem Text="Delete" x:Name="DeleteFlyoutItem" Tag="{x:Bind ID}" Click="DeleteFlyoutItem_Click"/>
+                                        <MenuFlyoutItem x:Uid="/UserLibraryResources/OpenInNewTabFlyoutItem" x:Name="OpenInNewTabFlyoutItem" Tag="{x:Bind Uri}" Click="OpenInNewTabFlyoutItem_Click"/>
+                                        <MenuFlyoutItem x:Uid="/UserLibraryResources/DeleteFlyoutItem" x:Name="DeleteFlyoutItem" Tag="{x:Bind ID}" Click="DeleteFlyoutItem_Click"/>
                                     </MenuFlyout>
                                 </Grid.ContextFlyout>
 

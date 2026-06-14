@@ -1,11 +1,12 @@
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.ApplicationModel.Resources;
 using Microsoft.UI.Xaml.Navigation;
-using System.Xml.Linq;
 
 namespace SharkyBrowser.SharkyUser
 {
     public sealed partial class SharkyUserLibraryView : Page
     {
+        private readonly ResourceLoader ResourceLoader = new(ResourceLoader.GetDefaultResourceFilePath(), "UserLibraryResources");
         public SharkyUserLibraryView()
         {
             InitializeComponent();
@@ -40,12 +41,12 @@ namespace SharkyBrowser.SharkyUser
             if (tag == "SharkyUserHistoryPage")
             {
                 ContentFrame.NavigateToType(typeof(SharkyUserLibraryHistoryPage), null, navOptions);
-                LibraryNavView.Header = "History";
+                LibraryNavView.Header = ResourceLoader.GetString("HistoryNavigationViewItem/Content");
             }
             else if (tag == "SharkyUserBookmarkPage")
             {
                 ContentFrame.NavigateToType(typeof(SharkyUserLibraryBookmarkPage), null, navOptions);
-                LibraryNavView.Header = "Bookmarks";
+                LibraryNavView.Header = ResourceLoader.GetString("BookmarkNavigationViewItem/Content");
             }
         }
     }
